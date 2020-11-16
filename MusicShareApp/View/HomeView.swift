@@ -18,16 +18,16 @@ struct HomeView : View {
             
             VStack{
                 
+                //すでにログインしているかの判定
+                //ログインしている場合
                 if self.status{
-                    
                     HomescreenView()
                 }
                 else{
-                    
+                    //ログインしていない場合
                     ZStack{
                         
                         NavigationLink(destination: SignupView(show: self.$show), isActive: self.$show) {
-                            
                             Text("")
                         }
                         .hidden()
@@ -40,9 +40,8 @@ struct HomeView : View {
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .onAppear {
-                
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("status"), object: nil, queue: .main) { (_) in
-                    
+                NotificationCenter.default.addObserver(forName: NSNotification.Name("status"),
+                                                       object: nil, queue: .main) { (_) in
                     self.status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
                 }
             }

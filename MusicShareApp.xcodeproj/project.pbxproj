@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29A6BA552562600A008C020E /* KeyboardObserve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A6BA542562600A008C020E /* KeyboardObserve.swift */; };
 		29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3C4256124D2006CE43D /* ErrorView.swift */; };
 		29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3D925612D04006CE43D /* HomescreenView.swift */; };
 		29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		023D36591A1B3FC66B0DBB64 /* Pods_MusicShareApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicShareApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09744E90D2D12C767C9E902C /* Pods-MusicShareApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicShareApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicShareApp/Pods-MusicShareApp.debug.xcconfig"; sourceTree = "<group>"; };
-		29A6BA542562600A008C020E /* KeyboardObserve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserve.swift; sourceTree = "<group>"; };
 		29BEB3C4256124D2006CE43D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		29BEB3D925612D04006CE43D /* HomescreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenView.swift; sourceTree = "<group>"; };
 		29BFE9B82560FC7C008FD849 /* MusicShareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicShareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +87,6 @@
 				29BFE9D32560FFEA008FD849 /* View */,
 				29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */,
 				29BFE9BD2560FC7C008FD849 /* SceneDelegate.swift */,
-				29A6BA542562600A008C020E /* KeyboardObserve.swift */,
 				29BFE9C12560FC7E008FD849 /* Assets.xcassets */,
 				29BFE9C62560FC7E008FD849 /* LaunchScreen.storyboard */,
 				29BFE9C92560FC7E008FD849 /* Info.plist */,
@@ -245,7 +242,6 @@
 			files = (
 				29BFE9E025610C7C008FD849 /* SignupView.swift in Sources */,
 				29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */,
-				29A6BA552562600A008C020E /* KeyboardObserve.swift in Sources */,
 				29BFE9BE2560FC7C008FD849 /* SceneDelegate.swift in Sources */,
 				29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */,
 				29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */,

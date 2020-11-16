@@ -14,7 +14,7 @@ struct HomescreenView : View {
         
         VStack{
             
-            Text("Logged successfully")
+            Text("ログイン成功")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black.opacity(0.7))
@@ -26,8 +26,7 @@ struct HomescreenView : View {
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
                 
             }) {
-                
-                Text("Log out")
+                Text("ログアウト")
                     .foregroundColor(.white)
                     .padding(.vertical)
                     .frame(width: UIScreen.main.bounds.width - 50)

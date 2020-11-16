@@ -17,8 +17,6 @@ struct ErrorView : View {
         
         GeometryReader{_ in
             
-            Spacer()
-            
             VStack {
                 Spacer()
                 
@@ -26,15 +24,11 @@ struct ErrorView : View {
                     Spacer()
                     
                     VStack{
-                                
                         HStack{
-                            
                             Text(self.error == "RESET" ? "Message" : "Error")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(self.color)
-                            
-                            Spacer()
                         }
                         .padding(.horizontal, 25)
                         
@@ -70,8 +64,6 @@ struct ErrorView : View {
                 
                 Spacer()
             }
-            
-            Spacer()
             
         }
         .background(Color.black.opacity(0.35).edgesIgnoringSafeArea(.all))

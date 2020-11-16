@@ -18,104 +18,129 @@ struct LoginView : View {
     @State var alert = false
     @State var error = ""
     
-    //キーボードの監視
-    @ObservedObject var keyboard = KeyboardObserver()
+    //キーボードオブザーブ用変数
+    @State var value: CGFloat = 0
     
     var body: some View{
         
         ZStack{
             
-            ZStack(alignment: .topTrailing) {
-                
-                GeometryReader{_ in
-                    VStack{
-                        
-                        Image("logo")
-                            .resizable()
-                            .frame(width: 250, height: 250, alignment: .center)
-                        
-                        Text("アカウントにログイン")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(self.color)
-                            .padding(.top, 35)
-                        
-                        TextField("Email", text: self.$email)
-                        .autocapitalization(.none)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
-                        .padding(.top, 25)
-                        
-                        HStack(spacing: 15){
+            VStack {
+                ZStack(alignment: .topTrailing) {
+                    
+                    GeometryReader{_ in
+                        VStack{
                             
-                            VStack{
+                            Image("logo")
+                                .resizable()
+                                .frame(width: 250, height: 250, alignment: .center)
+                            
+                            Text("アカウントにログイン")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(self.color)
+                                .padding(.top, 35)
+                            
+                            TextField("Email", text: self.$email)
+                            .autocapitalization(.none)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
+                            .padding(.top, 25)
+                            
+                            HStack(spacing: 15){
                                 
-                                if self.visible{
-                                    TextField("Password", text: self.$pass)
-                                    .autocapitalization(.none)
+                                VStack{
+                                    
+                                    if self.visible{
+                                        TextField("Password", text: self.$pass)
+                                        .autocapitalization(.none)
+                                    }
+                                    else{
+                                        SecureField("Password", text: self.$pass)
+                                        .autocapitalization(.none)
+                                    }
                                 }
-                                else{
-                                    SecureField("Password", text: self.$pass)
-                                    .autocapitalization(.none)
+                                
+                                Button(action: {
+                                    self.visible.toggle()
+                                }) {
+                                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                                        .foregroundColor(self.color)
+                                }
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color("Color3") : self.color,lineWidth: 2))
+                            .padding(.top, 25)
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    self.reset()
+                                }) {
+                                    Text("パスワードを忘れた場合")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color("Color3"))
                                 }
                             }
+                            .padding(.top, 20)
                             
                             Button(action: {
-                                self.visible.toggle()
+                                self.verify()
                             }) {
-                                Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                                    .foregroundColor(self.color)
+                                Text("ログイン")
+                                    .foregroundColor(.white)
+                                    .padding(.vertical)
+                                    .frame(width: UIScreen.main.bounds.width - 50)
                             }
+                            .background(Color("Color3"))
+                            .cornerRadius(10)
+                            .padding(.top, 25)
                             
                         }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color("Color3") : self.color,lineWidth: 2))
-                        .padding(.top, 25)
-                        
-                        HStack{
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                self.reset()
-                            }) {
-                                Text("パスワードを忘れた場合")
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("Color3"))
-                            }
-                        }
-                        .padding(.top, 20)
-                        
-                        Button(action: {
-                            self.verify()
-                        }) {
-                            Text("ログイン")
-                                .foregroundColor(.white)
-                                .padding(.vertical)
-                                .frame(width: UIScreen.main.bounds.width - 50)
-                        }
-                        .background(Color("Color3"))
-                        .cornerRadius(10)
-                        .padding(.top, 25)
-                        
+                        .padding(.horizontal, 25)
                     }
-                    .padding(.horizontal, 25)
+                    
+                    
+                    Button(action: {
+                        self.show.toggle()
+                    }) {
+                        Text("新規登録")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("Color3"))
+                    }
+                    .padding()
+                    
                 }
-                
-                Button(action: {
-                    self.show.toggle()
-                }) {
-                    Text("新規登録")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("Color3"))
-                }
-                .padding()
-                
             }
+            
             
             if self.alert{
                 
                 ErrorView(alert: self.$alert, error: self.$error)
+            }
+        }
+        //キーボードオブザーブ
+        .offset(y: -self.value)
+        .animation(.spring())
+        .onAppear {
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillShowNotification,
+                object: nil, queue: .main) { (noti) in
+                let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                let height = value.height
+                
+                self.value = height
+            }
+            
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil, queue: .main) { (noti) in
+                
+                
+                self.value = 0
             }
         }
         
