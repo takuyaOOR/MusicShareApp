@@ -7,6 +7,6 @@ target 'MusicShareApp' do
 
   # Pods for MusicShareApp
   pod 'Firebase'
-  pod 'Firebase/Auth'	
-  pod 'KeyboardObserving'
+  pod 'Firebase/Auth'
+
 end
