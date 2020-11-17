@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
+		299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DF2C22563C9C400B08F37 /* AccountView.swift */; };
 		29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3C4256124D2006CE43D /* ErrorView.swift */; };
 		29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3D925612D04006CE43D /* HomescreenView.swift */; };
 		29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 		023D36591A1B3FC66B0DBB64 /* Pods_MusicShareApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicShareApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09744E90D2D12C767C9E902C /* Pods-MusicShareApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicShareApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicShareApp/Pods-MusicShareApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
+		299DF2C22563C9C400B08F37 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		29BEB3C4256124D2006CE43D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		29BEB3D925612D04006CE43D /* HomescreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenView.swift; sourceTree = "<group>"; };
 		29BFE9B82560FC7C008FD849 /* MusicShareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicShareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +65,35 @@
 				A17A9B9A8F1B3D91B975D650 /* Pods-MusicShareApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		299DF2BE2563C99700B08F37 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				299DF2C22563C9C400B08F37 /* AccountView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		299DF2BF2563C99E00B08F37 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		299DF2C02563C9A400B08F37 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		299DF2C12563C9AB00B08F37 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		29BFE9AF2560FC7C008FD849 = {
@@ -109,6 +140,10 @@
 		29BFE9D32560FFEA008FD849 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				299DF2C12563C9AB00B08F37 /* Home */,
+				299DF2C02563C9A400B08F37 /* Search */,
+				299DF2BF2563C99E00B08F37 /* Favorite */,
+				299DF2BE2563C99700B08F37 /* Account */,
 				29BFE9BF2560FC7C008FD849 /* ContentView.swift */,
 				29BFE9DC25610026008FD849 /* HomeView.swift */,
 				29BFE9D42560FFFF008FD849 /* LoginView.swift */,
@@ -248,6 +283,7 @@
 				29BFE9BE2560FC7C008FD849 /* SceneDelegate.swift in Sources */,
 				2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */,
 				29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */,
+				299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */,
 				29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */,
 				29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */,
 				29BFE9DD25610026008FD849 /* HomeView.swift in Sources */,

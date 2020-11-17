@@ -15,22 +15,6 @@ struct HomescreenView : View {
     var body: some View{
         
         VStack(spacing: 0){
-        //ログアウト処理
-//            Button(action: {
-//                //ログアウト
-//                try! Auth.auth().signOut()
-//                UserDefaults.standard.set(false, forKey: "status")
-//                NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
-//
-//            }) {
-//                Text("ログアウト")
-//                    .foregroundColor(.white)
-//                    .padding(.vertical)
-//                    .frame(width: UIScreen.main.bounds.width - 50)
-//            }
-//            .background(Color("Color3"))
-//            .cornerRadius(10)
-//            .padding(.top, 25)
             
             ZStack {
                 //タブ切り替え
@@ -42,6 +26,7 @@ struct HomescreenView : View {
                     Color.green
                 } else{
                     Color.yellow
+                    AccountView()
                 }
                 
             }
