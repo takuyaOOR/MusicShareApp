@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
+		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
 		299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DF2C22563C9C400B08F37 /* AccountView.swift */; };
 		29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3C4256124D2006CE43D /* ErrorView.swift */; };
 		29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BEB3D925612D04006CE43D /* HomescreenView.swift */; };
@@ -28,6 +29,7 @@
 		023D36591A1B3FC66B0DBB64 /* Pods_MusicShareApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicShareApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09744E90D2D12C767C9E902C /* Pods-MusicShareApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicShareApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicShareApp/Pods-MusicShareApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
+		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
 		299DF2C22563C9C400B08F37 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		29BEB3C4256124D2006CE43D /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		29BEB3D925612D04006CE43D /* HomescreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomescreenView.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 				A17A9B9A8F1B3D91B975D650 /* Pods-MusicShareApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		295AA957256570510024C34F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				295AA9582565705F0024C34F /* SaveProfile.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		299DF2BE2563C99700B08F37 /* Account */ = {
@@ -117,6 +127,7 @@
 		29BFE9BA2560FC7C008FD849 /* MusicShareApp */ = {
 			isa = PBXGroup;
 			children = (
+				295AA957256570510024C34F /* Model */,
 				29BFE9D32560FFEA008FD849 /* View */,
 				29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */,
 				29BFE9BD2560FC7C008FD849 /* SceneDelegate.swift */,
@@ -280,6 +291,7 @@
 			files = (
 				29BFE9E025610C7C008FD849 /* SignupView.swift in Sources */,
 				29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */,
+				295AA9592565705F0024C34F /* SaveProfile.swift in Sources */,
 				29BFE9BE2560FC7C008FD849 /* SceneDelegate.swift in Sources */,
 				2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */,
 				29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */,

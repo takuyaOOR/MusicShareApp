@@ -122,7 +122,7 @@ struct LoginView : View {
                 ErrorView(alert: self.$alert, error: self.$error)
             }
         }
-        //キーボードオブザーブ
+        //キーボードオブザーブ（テキストフィールドがキーボードん隠れてしまうことの対策）
         .offset(y: -self.value)
         .animation(.spring())
         .onAppear {
@@ -168,6 +168,7 @@ struct LoginView : View {
                 print("success")
                 UserDefaults.standard.set(true, forKey: "status")
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                
             }
         }
         else{

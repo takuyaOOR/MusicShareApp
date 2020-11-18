@@ -12,6 +12,7 @@ struct SignupView : View {
     
     @State var color = Color.black.opacity(0.7)
     @State var email = ""
+    @State var userName = ""
     @State var pass = ""
     @State var repass = ""
     @State var visible = false
@@ -35,7 +36,7 @@ struct SignupView : View {
                         
                         Image("logo")
                             .resizable()
-                            .frame(width: 250, height: 250, alignment: .center)
+                            .frame(width: 150, height: 150, alignment: .center)
                         
                         Text("アカウントを新規登録")
                             .font(.title)
@@ -43,12 +44,22 @@ struct SignupView : View {
                             .foregroundColor(self.color)
                             .padding(.top, 35)
                         
+                        //メールアドレステキストフィールド
                         TextField("Email", text: self.$email)
-                        .autocapitalization(.none)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
-                        .padding(.top, 25)
+                            .autocapitalization(.none)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
+                            .padding(.top, 25)
                         
+                        //ユーザーネームテキストフィールド
+                        TextField("ユーザーネーム", text: self.$userName)
+                            .autocapitalization(.none)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 4).stroke(self.userName != "" ? Color("Color3") : self.color,lineWidth: 2))
+                            .padding(.top, 25)
+                        
+                        
+                        //パスワードテキストフィールド
                         HStack(spacing: 15){
                             
                             VStack{
@@ -64,6 +75,7 @@ struct SignupView : View {
                                 }
                             }
                             
+                            //パスワード可視化ボタン
                             Button(action: {
                                 self.visible.toggle()
                             }) {
@@ -76,6 +88,7 @@ struct SignupView : View {
                         .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color("Color3") : self.color,lineWidth: 2))
                         .padding(.top, 25)
                         
+                        //パスワード再入力テキストフィールド
                         HStack(spacing: 15){
                             
                             VStack{
@@ -92,6 +105,7 @@ struct SignupView : View {
                                 
                             }
                             
+                            //パスワード可視化ボタン
                             Button(action: {
                                 self.revisible.toggle()
                                 
@@ -105,6 +119,7 @@ struct SignupView : View {
                         .background(RoundedRectangle(cornerRadius: 4).stroke(self.repass != "" ? Color("Color3") : self.color,lineWidth: 2))
                         .padding(.top, 25)
                         
+                        //新規登録ボタン
                         Button(action: {
                             self.register()
                         }) {
@@ -122,6 +137,7 @@ struct SignupView : View {
                     
                 }
                 
+                //バックボタン
                 Button(action: {
                     self.show.toggle()
                 }) {
@@ -133,13 +149,14 @@ struct SignupView : View {
                 
             }
             
+            //もしエラーが存在するならErrorVoewを表示
             if self.alert{
                 ErrorView(alert: self.$alert, error: self.$error)
             }
             
         }
         .navigationBarHidden(true)
-        //キーボードオブザーブ
+        //キーボードオブザーブ（テキストフィールドがキーボードん隠れてしまうことの対策）
         .offset(y: -self.value)
         .animation(.spring())
         .onAppear {
@@ -162,10 +179,10 @@ struct SignupView : View {
         }
     }
     
-    //新規登録
+    //新規登録dW2RwBvLMuSwv70QPiyTtEfcGzP2
     func register(){
-        //メールの空白確認
-        if self.email != ""{
+        //メールとユーザーネームの空白確認
+        if self.email != "" && self.userName != ""{
             //パスワードが一致するかの確認
             if self.pass == self.repass{
                 //Firebaseにクリエイトユーザーのリクエストを送る
@@ -184,6 +201,19 @@ struct SignupView : View {
                     print("success")
                     UserDefaults.standard.set(true, forKey: "status")
                     NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                    
+                    //FirebaseにIDとユーザーネームを保存
+                    guard let user = res?.user else { return }
+                    let userID = user.uid
+                    let saveProfile = SaveProfile(userID: userID, userName: self.userName)
+                    saveProfile.saveProfile()
+                    
+                    //UserDefaultsにユーザーIDを保存
+                    UserDefaults.standard.setValue(userID, forKey: "userID")
+                    
+                    //Userdefaultにユーザーネームを保存
+                    UserDefaults.standard.setValue(self.userName, forKey: "userName")
+                    
                 }
             }
             else{

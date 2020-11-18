@@ -19,13 +19,16 @@ struct HomescreenView : View {
             ZStack {
                 //タブ切り替え
                 if self.index == 0 {
-                    Color.red
+                    Text("Home")
+                    Color("Color1").opacity(0.35)
                 } else if self.index == 1 {
-                    Color.blue
+                    Text("Search")
+                    Color("Color1").opacity(0.35)
                 } else if self.index == 2 {
-                    Color.green
+                    Text("Favorite")
+                    Color("Color1").opacity(0.35)
                 } else{
-                    Color.yellow
+                    Color("Color1").opacity(0.35)
                     AccountView()
                 }
                 
