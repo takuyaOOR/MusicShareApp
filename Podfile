@@ -9,5 +9,6 @@ target 'MusicShareApp' do
   pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'PKHUD', '~> 5.0'
 
 end

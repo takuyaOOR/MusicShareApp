@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import PKHUD
 
 struct SignupView : View {
     
@@ -181,17 +182,26 @@ struct SignupView : View {
     
     //新規登録
     func register(){
+        
+        //インディケーターを回す
+        HUD.show(.progress)
+        
         //メールとユーザーネームの空白確認
         if self.email != "" && self.userName != ""{
             //パスワードが一致するかの確認
             if self.pass == self.repass{
                 //Firebaseにクリエイトユーザーのリクエストを送る
                 Auth.auth().createUser(withEmail: self.email, password: self.pass) { (res, err) in
+                    
                     //エラーが存在する場合
                     if err != nil{
                         //アラートをtrueにして返す
                         self.error = err!.localizedDescription
                         self.alert.toggle()
+                        
+                        //インディケーターを隠す
+                        HUD.hide()
+                        
                         return
                     }
                     
@@ -204,15 +214,20 @@ struct SignupView : View {
                     
                     //Firebase(Realtime Database)にIDとユーザーネームを保存
                     guard let user = res?.user else { return }
-                    let userID = user.uid
-                    let saveProfile = SaveProfile(userID: userID, userName: self.userName, email: self.email)
+                    let saveProfile = SaveProfile(userID: user.uid, userName: self.userName, email: self.email)
                     saveProfile.saveProfile()
                     
                     //UserDefaultsにユーザーIDを保存
-                    UserDefaults.standard.setValue(userID, forKey: "userID")
+                    UserDefaults.standard.setValue(user.uid, forKey: "userID")
+                    
+                    //UserDefaultにメールアドレスを保存する
+                    UserDefaults.standard.setValue(user.email, forKey: "email")
                     
                     //Userdefaultにユーザーネームを保存
                     UserDefaults.standard.setValue(self.userName, forKey: "userName")
+                    
+                    //インディケーターを隠す
+                    HUD.hide()
                     
                 }
             }
@@ -220,12 +235,18 @@ struct SignupView : View {
                 //パスワードが一致しない場合
                 self.error = "パスワードが一致しません"
                 self.alert.toggle()
+                
+                //インディケーターを隠す
+                HUD.hide()
             }
         }
         else{
             //項目に空白がある場合
             self.error = "すべての項目を入力してください"
             self.alert.toggle()
+            
+            //インディケーターを隠す
+            HUD.hide()
         }
         
     }

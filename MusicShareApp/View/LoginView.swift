@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import PKHUD
 
 struct LoginView : View {
     
@@ -141,7 +142,6 @@ struct LoginView : View {
                 forName: UIResponder.keyboardWillHideNotification,
                 object: nil, queue: .main) { (noti) in
                 
-                
                 self.value = 0
             }
         }
@@ -151,16 +151,24 @@ struct LoginView : View {
     //認証
     func verify(){
         
+        //インディケーターを回す
+        HUD.show(.progress)
+        
         //メールとパスワードの空白確認
         if self.email != "" && self.pass != ""{
             
             //Firebaseに認証のリスエストを送る
             Auth.auth().signIn(withEmail: self.email, password: self.pass) { (res, err) in
                 
+                
                 if err != nil{
                     //エラーの場合アラートをtrueにして返す
                     self.error = err!.localizedDescription
                     self.alert.toggle()
+                    
+                    //インディケーターを隠す
+                    HUD.hide()
+                    
                     return
                 }
                 
@@ -171,18 +179,29 @@ struct LoginView : View {
                 UserDefaults.standard.set(true, forKey: "status")
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
                 
-                //ユーザーIDをFirebaseから取得しUserDefaultに保存
+                //ユーザー情報を取得
                 guard let user = res?.user else { return }
-                let userID = user.uid
-                UserDefaults.standard.setValue(userID, forKey: "userID")
                 
-                //uidと紐づくユーザーネームをFirebaseから取得しUserDefaultに保存
-                ref.child("profile").observe(.childAdded) { (snapShot) in
+                //ユーザーIDをFirebaseから取得しUserDefaultに保存
+                UserDefaults.standard.setValue(user.uid, forKey: "userID")
+                
+                //メールアドレスをUserdefaultに保存
+                UserDefaults.standard.setValue(user.email, forKey: "email")
+                
+                print(user.uid)
+                print(user.email!)
+                
+                //uidと紐づくユーザーネームをFirebase(Realtime Database)から取得しUserDefaultに保存
+                ref.child("profile").child(user.uid).observe(.value) { (snapShot) in
                     if let user = snapShot.value as? [String:Any] {
                         let userName = user["userName"]
                         UserDefaults.standard.setValue(userName, forKey: "userName")
+                        print(userName!)
                     }
                 }
+                
+                //インディケーターを隠す
+                HUD.hide()
                 
             }
         }
@@ -190,11 +209,17 @@ struct LoginView : View {
             //項目に空白がある場合
             self.error = "すべての項目を入力してください"
             self.alert.toggle()
+            
+            //インディケーターを隠す
+            HUD.hide()
         }
     }
     
     //パスワード忘れ
     func reset(){
+        
+        //インディケーターを回す
+        HUD.show(.progress)
         
         //メールに空白確認
         if self.email != ""{
@@ -205,17 +230,24 @@ struct LoginView : View {
                     //エラーが存在する場合アラートをtrueにして返す
                     self.error = err!.localizedDescription
                     self.alert.toggle()
+                    //インディケーターを隠す
+                    HUD.hide()
                     return
                 }
                 //リセットが成功した場合
                 self.error = "RESET"
                 self.alert.toggle()
+                
+                //インディケーターを隠す
+                HUD.hide()
             }
         }
         else{
             //メールがからの場合
             self.error = "メールが入力されていません"
             self.alert.toggle()
+            //インディケーターを隠す
+            HUD.hide()
         }
     }
     
