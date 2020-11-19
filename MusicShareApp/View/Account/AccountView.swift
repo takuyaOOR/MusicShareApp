@@ -9,9 +9,17 @@ import SwiftUI
 import Firebase
 
 struct AccountView: View {
+    //ユーザーIDとユーザーネームを取得
+    let userID = UserDefaults.standard.object(forKey: "userID") as? String
+    let userName = UserDefaults.standard.object(forKey: "userName") as? String
+    
     var body: some View {
         VStack(spacing: 0) {
+            
+            Text(userID!)
+            Text(userName!)
             //ログアウト処理
+            
             Button(action: {
                 //ログアウト
                 try! Auth.auth().signOut()

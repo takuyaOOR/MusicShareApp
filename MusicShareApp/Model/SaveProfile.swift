@@ -13,14 +13,16 @@ class SaveProfile{
     //Firebaseに値を渡す
     var userID:String! = ""
     var userName:String! = ""
+    var email:String! = ""
     var ref: DatabaseReference!
     
-    init(userID: String, userName: String) {
+    init(userID: String, userName: String, email: String) {
         self.userID = userID
         self.userName = userName
+        self.email = email
         
         //ログインのときにuidを先頭につけて送信する。受信のときもuidから取得
-        ref = Database.database().reference().child("profile").childByAutoId()
+        ref = Database.database().reference().child("profile").child(userID)
     }
     
     init (snapShot: DataSnapshot) {
@@ -36,13 +38,11 @@ class SaveProfile{
     //ユーザー情報（userID,userEmail）を保存するメソッド
     func saveProfile() {
         ref.setValue(toContents())
-        //ユーザーデフォルトにautoIDとしてユニークな値を保存
-        UserDefaults.standard.setValue(ref.key, forKey: "autoID")
     }
     
     func toContents()->[String:Any]{
         
-        return ["userID":userID!,"userName":userName as Any]
+        return ["userName":userName,"email":email as Any]
         
     }
     

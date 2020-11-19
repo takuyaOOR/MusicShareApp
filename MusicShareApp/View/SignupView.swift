@@ -179,7 +179,7 @@ struct SignupView : View {
         }
     }
     
-    //新規登録dW2RwBvLMuSwv70QPiyTtEfcGzP2
+    //新規登録
     func register(){
         //メールとユーザーネームの空白確認
         if self.email != "" && self.userName != ""{
@@ -202,10 +202,10 @@ struct SignupView : View {
                     UserDefaults.standard.set(true, forKey: "status")
                     NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
                     
-                    //FirebaseにIDとユーザーネームを保存
+                    //Firebase(Realtime Database)にIDとユーザーネームを保存
                     guard let user = res?.user else { return }
                     let userID = user.uid
-                    let saveProfile = SaveProfile(userID: userID, userName: self.userName)
+                    let saveProfile = SaveProfile(userID: userID, userName: self.userName, email: self.email)
                     saveProfile.saveProfile()
                     
                     //UserDefaultsにユーザーIDを保存

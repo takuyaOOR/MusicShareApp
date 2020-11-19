@@ -18,6 +18,8 @@ struct LoginView : View {
     @State var alert = false
     @State var error = ""
     
+    //RealtimeDatabase(pfofile情報)
+    var ref = Database.database().reference()
     //キーボードオブザーブ用変数
     @State var value: CGFloat = 0
     
@@ -168,6 +170,19 @@ struct LoginView : View {
                 print("success")
                 UserDefaults.standard.set(true, forKey: "status")
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                
+                //ユーザーIDをFirebaseから取得しUserDefaultに保存
+                guard let user = res?.user else { return }
+                let userID = user.uid
+                UserDefaults.standard.setValue(userID, forKey: "userID")
+                
+                //uidと紐づくユーザーネームをFirebaseから取得しUserDefaultに保存
+                ref.child("profile").observe(.childAdded) { (snapShot) in
+                    if let user = snapShot.value as? [String:Any] {
+                        let userName = user["userName"]
+                        UserDefaults.standard.setValue(userName, forKey: "userName")
+                    }
+                }
                 
             }
         }
