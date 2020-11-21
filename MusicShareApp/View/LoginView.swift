@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import PKHUD
+import UIKit
 
 struct LoginView : View {
     
@@ -44,23 +45,27 @@ struct LoginView : View {
                                 .foregroundColor(self.color)
                                 .padding(.top, 35)
                             
-                            TextField("Email", text: self.$email)
-                            .autocapitalization(.none)
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
-                            .padding(.top, 25)
+                            TextField("メールアドレス", text: self.$email)
+                                .autocapitalization(.none)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
+                                .padding(.top, 25)
+                                .font(Font.system(size: 13, design: .default))
+                            
                             
                             HStack(spacing: 15){
                                 
                                 VStack{
                                     
                                     if self.visible{
-                                        TextField("Password", text: self.$pass)
-                                        .autocapitalization(.none)
+                                        TextField("パスワード", text: self.$pass)
+                                            .autocapitalization(.none)
+                                            .font(Font.system(size: 13, design: .default))
                                     }
                                     else{
-                                        SecureField("Password", text: self.$pass)
-                                        .autocapitalization(.none)
+                                        SecureField("パスワード", text: self.$pass)
+                                            .autocapitalization(.none)
+                                            .font(Font.system(size: 13, design: .default))
                                     }
                                 }
                                 
@@ -135,7 +140,7 @@ struct LoginView : View {
                 let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
                 let height = value.height
                 
-                self.value = height
+                self.value = height * 0.75
             }
             
             NotificationCenter.default.addObserver(
@@ -168,6 +173,10 @@ struct LoginView : View {
                     
                     //インディケーターを隠す
                     HUD.hide()
+                    
+                    //キーボードの高さ分ずらしたviewを戻す
+                    self.value = 0
+                    UIApplication.shared.closeKeyboard()
                     
                     return
                 }
@@ -210,6 +219,10 @@ struct LoginView : View {
             self.error = "すべての項目を入力してください"
             self.alert.toggle()
             
+            //キーボードの高さ分ずらしたviewを戻す
+            self.value = 0
+            UIApplication.shared.closeKeyboard()
+            
             //インディケーターを隠す
             HUD.hide()
         }
@@ -230,13 +243,23 @@ struct LoginView : View {
                     //エラーが存在する場合アラートをtrueにして返す
                     self.error = err!.localizedDescription
                     self.alert.toggle()
+                    
                     //インディケーターを隠す
                     HUD.hide()
+                    
+                    //キーボードの高さ分ずらしたviewを戻す
+                    self.value = 0
+                    UIApplication.shared.closeKeyboard()
+                    
                     return
                 }
                 //リセットが成功した場合
                 self.error = "RESET"
                 self.alert.toggle()
+                
+                //キーボードの高さ分ずらしたviewを戻す
+                self.value = 0
+                UIApplication.shared.closeKeyboard()
                 
                 //インディケーターを隠す
                 HUD.hide()
@@ -246,6 +269,11 @@ struct LoginView : View {
             //メールがからの場合
             self.error = "メールが入力されていません"
             self.alert.toggle()
+            
+            //キーボードの高さ分ずらしたviewを戻す
+            self.value = 0
+            UIApplication.shared.closeKeyboard()
+            
             //インディケーターを隠す
             HUD.hide()
         }

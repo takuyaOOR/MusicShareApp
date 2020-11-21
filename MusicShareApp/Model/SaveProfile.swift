@@ -25,15 +25,15 @@ class SaveProfile{
         ref = Database.database().reference().child("profile").child(userID)
     }
     
-    init (snapShot: DataSnapshot) {
-        
-        ref = snapShot.ref
-        if let value = snapShot.value as? [String:Any] {
-            userID = value["userID"] as? String
-            userName = value["userName"] as? String
-        }
-        
-    }
+//    init (snapShot: DataSnapshot) {
+//        
+//        ref = snapShot.ref
+//        if let value = snapShot.value as? [String:Any] {
+//            userID = value["userID"] as? String
+//            userName = value["userName"] as? String
+//        }
+//        
+//    }
     
     //ユーザー情報（userID,userEmail）を保存するメソッド
     func saveProfile() {
@@ -42,7 +42,7 @@ class SaveProfile{
     
     func toContents()->[String:Any]{
         
-        return ["userName":userName,"email":email as Any]
+        return ["userName":userName!,"email":email!]
         
     }
     

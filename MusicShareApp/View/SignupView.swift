@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import PKHUD
+import UIKit
 
 struct SignupView : View {
     
@@ -46,11 +47,12 @@ struct SignupView : View {
                             .padding(.top, 35)
                         
                         //メールアドレステキストフィールド
-                        TextField("Email", text: self.$email)
+                        TextField("メールアドレス", text: self.$email)
                             .autocapitalization(.none)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color("Color3") : self.color,lineWidth: 2))
                             .padding(.top, 25)
+                            .font(Font.system(size: 13, design: .default))
                         
                         //ユーザーネームテキストフィールド
                         TextField("ユーザーネーム", text: self.$userName)
@@ -58,6 +60,7 @@ struct SignupView : View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.userName != "" ? Color("Color3") : self.color,lineWidth: 2))
                             .padding(.top, 25)
+                            .font(Font.system(size: 13, design: .default))
                         
                         
                         //パスワードテキストフィールド
@@ -66,13 +69,15 @@ struct SignupView : View {
                             VStack{
                                 
                                 if self.visible{
-                                    TextField("Password", text: self.$pass)
-                                    .autocapitalization(.none)
+                                    TextField("パスワード", text: self.$pass)
+                                        .autocapitalization(.none)
+                                        .font(Font.system(size: 13, design: .default))
                                 }
                                 else{
                                     
-                                    SecureField("Password", text: self.$pass)
-                                    .autocapitalization(.none)
+                                    SecureField("パスワード", text: self.$pass)
+                                        .autocapitalization(.none)
+                                    .   font(Font.system(size: 13, design: .default))
                                 }
                             }
                             
@@ -97,11 +102,13 @@ struct SignupView : View {
                                 if self.revisible{
                                     
                                     TextField("パスワードを再入力", text: self.$repass)
-                                    .autocapitalization(.none)
+                                        .autocapitalization(.none)
+                                        .font(Font.system(size: 13, design: .default))
                                 }
                                 else{
                                     SecureField("パスワードを再入力", text: self.$repass)
-                                    .autocapitalization(.none)
+                                        .autocapitalization(.none)
+                                        .font(Font.system(size: 13, design: .default))
                                 }
                                 
                             }
@@ -167,7 +174,7 @@ struct SignupView : View {
                 let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
                 let height = value.height
                 
-                self.value = height
+                self.value = height * 0.75
             }
             
             NotificationCenter.default.addObserver(
@@ -201,6 +208,10 @@ struct SignupView : View {
                         
                         //インディケーターを隠す
                         HUD.hide()
+                        
+                        //キーボードの高さ分ずらしたviewを戻す
+                        self.value = 0
+                        UIApplication.shared.closeKeyboard()
                         
                         return
                     }
@@ -236,6 +247,10 @@ struct SignupView : View {
                 self.error = "パスワードが一致しません"
                 self.alert.toggle()
                 
+                //キーボードの高さ分ずらしたviewを戻す
+                self.value = 0
+                UIApplication.shared.closeKeyboard()
+                
                 //インディケーターを隠す
                 HUD.hide()
             }
@@ -245,9 +260,15 @@ struct SignupView : View {
             self.error = "すべての項目を入力してください"
             self.alert.toggle()
             
+            //キーボードの高さ分ずらしたviewを戻す
+            self.value = 0
+            UIApplication.shared.closeKeyboard()
+            
             //インディケーターを隠す
             HUD.hide()
         }
         
     }
 }
+
+
