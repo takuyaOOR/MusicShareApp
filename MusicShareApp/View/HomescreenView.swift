@@ -22,19 +22,21 @@ struct HomescreenView : View {
                 if self.index == 0 {
                     //ホーム画面
                     Text("Home")
-                    Color("Color1").opacity(0.05)
+                    Color("Color1").opacity(0.1)
                         .edgesIgnoringSafeArea(.top)
                 } else if self.index == 1 {
                     //検索画面
-                    Color("Color1").opacity(0.05)
+                    Color("Color1").opacity(0.1)
                         .edgesIgnoringSafeArea(.top)
                     SearchView()
                 } else if self.index == 2 {
                     //お気に入り画面
                     Text("Favorite")
-                    Color("Color1").opacity(0.05).edgesIgnoringSafeArea(.top)                } else{
+                    Color("Color1").opacity(0.1)
+                        .edgesIgnoringSafeArea(.top)
+                } else{
                     //アカウント画面
-                    Color("Color1").opacity(0.05)
+                    Color("Color1").opacity(0.1)
                         .edgesIgnoringSafeArea(.top)
                     AccountView()
                 }

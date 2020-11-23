@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		29076BA025692A8E001A202E /* MusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076B9F25692A8E001A202E /* MusicItem.swift */; };
-		29076BA325692F0C001A202E /* MusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076BA225692F0C001A202E /* MusicData.swift */; };
 		29076BA6256933CC001A202E /* ItunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076BA5256933CC001A202E /* ItunesSearchAPI.swift */; };
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
 		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
-		296F63922566B68100AC7B67 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296F63912566B68100AC7B67 /* CardView.swift */; };
+		29639479256A34F10025858D /* StackSwipableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639478256A34F10025858D /* StackSwipableCardView.swift */; };
+		29639481256BE14F0025858D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639480256BE14F0025858D /* CardView.swift */; };
 		296F63A42566BA7A00AC7B67 /* SaveMusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */; };
 		2988C6AB25661FC500883C25 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988C6AA25661FC500883C25 /* SearchView.swift */; };
 		299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299DF2C22563C9C400B08F37 /* AccountView.swift */; };
@@ -36,11 +36,11 @@
 		023D36591A1B3FC66B0DBB64 /* Pods_MusicShareApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicShareApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09744E90D2D12C767C9E902C /* Pods-MusicShareApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicShareApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicShareApp/Pods-MusicShareApp.debug.xcconfig"; sourceTree = "<group>"; };
 		29076B9F25692A8E001A202E /* MusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicItem.swift; sourceTree = "<group>"; };
-		29076BA225692F0C001A202E /* MusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicData.swift; sourceTree = "<group>"; };
 		29076BA5256933CC001A202E /* ItunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesSearchAPI.swift; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
 		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
-		296F63912566B68100AC7B67 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		29639478256A34F10025858D /* StackSwipableCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackSwipableCardView.swift; sourceTree = "<group>"; };
+		29639480256BE14F0025858D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMusicData.swift; sourceTree = "<group>"; };
 		2988C6AA25661FC500883C25 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		299DF2C22563C9C400B08F37 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -89,7 +89,6 @@
 				295AA9582565705F0024C34F /* SaveProfile.swift */,
 				296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */,
 				29076B9F25692A8E001A202E /* MusicItem.swift */,
-				29076BA225692F0C001A202E /* MusicData.swift */,
 				29076BA5256933CC001A202E /* ItunesSearchAPI.swift */,
 			);
 			path = Model;
@@ -114,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2988C6AA25661FC500883C25 /* SearchView.swift */,
-				296F63912566B68100AC7B67 /* CardView.swift */,
+				29639480256BE14F0025858D /* CardView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 		29F6DED5256780D4001421A4 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				29639478256A34F10025858D /* StackSwipableCardView.swift */,
 				29F6DED6256780E3001421A4 /* UIApplication+ext.swift */,
 				29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */,
 				29BFE9BD2560FC7C008FD849 /* SceneDelegate.swift */,
@@ -318,7 +318,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29076BA325692F0C001A202E /* MusicData.swift in Sources */,
 				29F6DED7256780E4001421A4 /* UIApplication+ext.swift in Sources */,
 				29BFE9E025610C7C008FD849 /* SignupView.swift in Sources */,
 				29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */,
@@ -328,9 +327,10 @@
 				2988C6AB25661FC500883C25 /* SearchView.swift in Sources */,
 				2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */,
 				29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */,
-				296F63922566B68100AC7B67 /* CardView.swift in Sources */,
 				299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */,
+				29639481256BE14F0025858D /* CardView.swift in Sources */,
 				29076BA025692A8E001A202E /* MusicItem.swift in Sources */,
+				29639479256A34F10025858D /* StackSwipableCardView.swift in Sources */,
 				29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */,
 				29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */,
 				29BFE9DD25610026008FD849 /* HomeView.swift in Sources */,

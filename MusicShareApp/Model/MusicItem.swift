@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct MusicItem: Codable {
+struct MusicItem: Codable, Identifiable {
+    var id = UUID()
     var musicName: String
     var artistName: String
     var previewURL: String
