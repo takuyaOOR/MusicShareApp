@@ -18,6 +18,12 @@ struct SearchView: View {
     
     @ObservedObject var itunesSearchAPI = ItunesSearchAPI()
     
+    @State var alert = false
+    @State var error = ""
+    
+    //キーボードオブザーブ用変数
+    @State var value: CGFloat = 0
+    
     var body: some View {
         
         VStack(spacing:0) {
@@ -28,25 +34,19 @@ struct SearchView: View {
                     //入力終了時
                     //startParseを実行
                     itunesSearchAPI.startParse(keyword: title)
+                    //キーボードを閉じる
+                    UIApplication.shared.closeKeyboard()
+                    
+                    self.title = ""
                     
                 })
                     .font(Font.system(size: 13, design: .default))
                     .autocapitalization(.none)
                 
-                Button(action: {
-                    //検索ボタン押下時
-                    //startParseを実行
-                    itunesSearchAPI.startParse(keyword: title)
-                }) {
-                    Image(systemName: "magnifyingglass.circle")
-                        .foregroundColor(self.color)
-                        .frame(width: 15, height: 15)
-                }
-                
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 4).stroke(self.title != "" ? Color("Color3") : self.color,lineWidth: 2))
-            .padding(.top, 25)
+            .padding(.top, 20)
                 
             //MusicCardを表示
             GeometryReader{geometry in
@@ -58,16 +58,15 @@ struct SearchView: View {
                             //Card View
                             CardView(musicName: music.musicName,
                                      artistName: music.artistName,
-                                     previewURL: music.previewURL,
-                                     imageURL: music.imageURL,
+                                     previewUrl: music.previewUrl,
+                                     imageUrl: music.imageUrl,
                                      ofset: 0,
                                      frame: geometry.frame(in: .global))
                         }
                     }
-                    
                 }
             }
-            .padding(.top, 35)
+            .padding(.top, 20)
 
         }
         .padding(.horizontal, 25)

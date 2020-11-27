@@ -164,7 +164,7 @@ struct SignupView : View {
             
         }
         .navigationBarHidden(true)
-        //キーボードオブザーブ（テキストフィールドがキーボードん隠れてしまうことの対策）
+        //キーボードオブザーブ（テキストフィールドがキーボードに隠れてしまうことの対策）
         .offset(y: -self.value)
         .animation(.spring())
         .onAppear {
@@ -180,7 +180,6 @@ struct SignupView : View {
             NotificationCenter.default.addObserver(
                 forName: UIResponder.keyboardWillHideNotification,
                 object: nil, queue: .main) { (noti) in
-                
                 
                 self.value = 0
             }

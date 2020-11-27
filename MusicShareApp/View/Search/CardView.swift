@@ -6,44 +6,59 @@
 //
 
 import SwiftUI
+import AVKit
 import SDWebImageSwiftUI
+import Firebase
 
 struct CardView: View {
     
+    //音楽情報受け取り用変数
     @State var musicName: String
     @State var artistName: String
-    @State var previewURL: String
-    @State var imageURL: String
-    
+    @State var previewUrl: String
+    @State var imageUrl: String
     @State var ofset: CGFloat
     
     var frame: CGRect
     
+    //ユーザーIDとユーザーネーム
+    var userID = UserDefaults.standard.object(forKey: "userID")
+    var userName = UserDefaults.standard.object(forKey: "userName")
+    
+    //音楽再生用変数
+    @State var player:AVPlayer?
+    
+    //Databaseリファレンス
+    var ref = Database.database().reference()
+    
     var body: some View {
-        ZStack {
+        
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+            
             VStack {
-                //画像表示
-                WebImage(url: URL(string: String(imageURL)))
-                    .padding(.top, 25)
                 
-                Spacer()
+                //画像表示
+                WebImage(url: URL(string: String(imageUrl)))
                 
                 //楽曲情報表示
                 VStack(spacing: 15) {
                     HStack {
-                        VStack(alignment: .leading, spacing: 12) {
+                        
+                        VStack(spacing: 12) {
                             //アーティスト名
                             Text(musicName)
-                                .font(.title)
+                                .font(.headline)
                                 .fontWeight(.bold)
+                                .lineLimit(3)
                                 .foregroundColor(Color("Color1"))
 
                             Text(artistName)
+                                .font(.subheadline)
                                 .fontWeight(.bold)
+                                .lineLimit(3)
                                 .foregroundColor(Color("Color1"))
                         }
 
-                        Spacer(minLength: 0)
                     }
 
                     HStack(spacing: 35) {
@@ -57,14 +72,39 @@ struct CardView: View {
                                 //左に動かす
                                 self.ofset = -500
                             }
+                            //音楽を止める
+                            player?.pause()
     
                         }) {
                             Image(systemName: "xmark")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("Color3"))
                                 .padding(20)
-                                .background((Color("Color3")))
+                                .background((Color("Color1")))
                                 .clipShape(Circle())
+                                .shadow(color: Color("Color1").opacity(0.6),
+                                        radius: 5, x: 5, y: 5)
+                                .shadow(color: Color.white,
+                                        radius: 5, x: -5, y: -5)
+                        }
+                        
+                        //再生ボタン
+                        Button(action: {
+                            
+                            //音楽を再生する
+                            playMusic(url: previewUrl)
+                            
+                        }) {
+                            Image(systemName: "play")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(Color.blue)
+                                .padding(20)
+                                .background(Color("Color1"))
+                                .clipShape(Circle())
+                                .shadow(color: Color("Color1").opacity(0.6),
+                                        radius: 5, x: 5, y: 5)
+                                .shadow(color: Color.white,
+                                        radius: 5, x: -5, y: -5)
                         }
     
                         //◯ボタン
@@ -74,14 +114,24 @@ struct CardView: View {
                                 //右に動かす
                                 self.ofset = 500
                             }
+                            //音楽を止める
+                            player?.pause()
+                            //お気に入り処理
+                            saveMusic(artistName: artistName, musicName: musicName,
+                                      previewUrl: previewUrl, imageUrl: imageUrl,
+                                      userID: userID as! String, userName: userName as! String)
     
                         }) {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.green)
                                 .padding(20)
-                                .background((Color.green))
+                                .background(Color("Color1"))
                                 .clipShape(Circle())
+                                .shadow(color: Color("Color1").opacity(0.6),
+                                        radius: 5, x: 5, y: 5)
+                                .shadow(color: Color.white,
+                                        radius: 5, x: -5, y: -5)
                         }
     
                         Spacer(minLength: 0)
@@ -90,12 +140,15 @@ struct CardView: View {
                 .padding()
                 
             }
-            .frame(width: frame.size.width, height: frame.size.height - 65)
-            .background(Color.white)
+            .frame(width: frame.size.width, height: frame.size.height - 45)
+            //カードの移動距離でカード自体の色を変える
+            .background((self.ofset == 0 ? Color.white : (self.ofset > 0 ? Color.green : Color("Color3"))
+                            .opacity(self.ofset != 0 ? 0.7 : 0)))
             .cornerRadius(15)
             .offset(x: self.ofset)
             //回転して動かす
             .rotationEffect(.init(degrees: (self.ofset) == 0 ? 0 : (self.ofset > 0 ? 12 : -12)))
+            //ロングタップで動かせるようにする
             .gesture(
                 DragGesture()
                     .onChanged({ (value) in
@@ -105,11 +158,22 @@ struct CardView: View {
                     })
                     .onEnded({ (value) in
                         withAnimation(.easeIn){
+                            //Likedジェスチャー
                             if self.ofset > 150{
                                 self.ofset = 500
+                                //音楽を止める
+                                player?.pause()
+//                                //お気に入り処理
+                                saveMusic(artistName: artistName, musicName: musicName,
+                                          previewUrl: previewUrl, imageUrl: imageUrl,
+                                          userID: userID as! String, userName: userName as! String)
+                                
                             }
+                            //Rejectedジャスチャー
                             else if self.ofset < -150{
                                 self.ofset = -500
+                                //音楽を止める
+                                player?.pause()
                             }
                             else{
                                 self.ofset = 0
@@ -119,6 +183,33 @@ struct CardView: View {
             )
             
         }
+        
     }
+    
+    //音楽再生用メソッド
+    func playMusic(url: String) {
+        print("------------------------------------------------------")
+        print(url)
+        
+        let url = URL(string: url)
+        
+        let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
+        player = AVPlayer(playerItem: playerItem)
+        player?.play()
+        
+    }
+    
+    func saveMusic(artistName: String, musicName: String,
+                   previewUrl: String, imageUrl: String,
+                   userID: String, userName: String) {
+        
+        let saveMusicData = SaveMusicData(artistName: artistName, musicName: musicName,
+                                          previewUrl: previewUrl, imageUrl: imageUrl,
+                                          userID: userID, userName: userName)
+        
+        saveMusicData.save()
+        
+    }
+    
 }
 

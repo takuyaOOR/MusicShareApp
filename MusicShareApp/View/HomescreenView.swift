@@ -17,7 +17,6 @@ struct HomescreenView : View {
         VStack(spacing: 0){
             
             ZStack {
-                //!!!!!viewのあとにColorを乗せるとviewにかぶってしまい機能しなくなる
                 //タブ切り替え
                 if self.index == 0 {
                     //ホーム画面
@@ -31,9 +30,9 @@ struct HomescreenView : View {
                     SearchView()
                 } else if self.index == 2 {
                     //お気に入り画面
-                    Text("Favorite")
                     Color("Color1").opacity(0.1)
                         .edgesIgnoringSafeArea(.top)
+                    FavoriteView()
                 } else{
                     //アカウント画面
                     Color("Color1").opacity(0.1)
@@ -47,6 +46,7 @@ struct HomescreenView : View {
             CustomTabsView(index: self.$index)
             
         }
+        
         
     }
 }

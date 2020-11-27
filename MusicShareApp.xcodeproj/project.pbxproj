@@ -11,7 +11,6 @@
 		29076BA6256933CC001A202E /* ItunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076BA5256933CC001A202E /* ItunesSearchAPI.swift */; };
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
 		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
-		29639479256A34F10025858D /* StackSwipableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639478256A34F10025858D /* StackSwipableCardView.swift */; };
 		29639481256BE14F0025858D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639480256BE14F0025858D /* CardView.swift */; };
 		296F63A42566BA7A00AC7B67 /* SaveMusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */; };
 		2988C6AB25661FC500883C25 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2988C6AA25661FC500883C25 /* SearchView.swift */; };
@@ -28,6 +27,8 @@
 		29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BFE9D42560FFFF008FD849 /* LoginView.swift */; };
 		29BFE9DD25610026008FD849 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BFE9DC25610026008FD849 /* HomeView.swift */; };
 		29BFE9E025610C7C008FD849 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BFE9DF25610C7C008FD849 /* SignupView.swift */; };
+		29C5A28C256FAD5200134E0C /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C5A28B256FAD5200134E0C /* FavoriteView.swift */; };
+		29F2E2D225708F7D0071CFA9 /* GetFavMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F2E2D125708F7D0071CFA9 /* GetFavMusic.swift */; };
 		29F6DED7256780E4001421A4 /* UIApplication+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F6DED6256780E3001421A4 /* UIApplication+ext.swift */; };
 		9B2A85295A9D6F6718A50F50 /* Pods_MusicShareApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023D36591A1B3FC66B0DBB64 /* Pods_MusicShareApp.framework */; };
 /* End PBXBuildFile section */
@@ -39,7 +40,6 @@
 		29076BA5256933CC001A202E /* ItunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesSearchAPI.swift; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
 		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
-		29639478256A34F10025858D /* StackSwipableCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackSwipableCardView.swift; sourceTree = "<group>"; };
 		29639480256BE14F0025858D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMusicData.swift; sourceTree = "<group>"; };
 		2988C6AA25661FC500883C25 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -58,6 +58,8 @@
 		29BFE9D42560FFFF008FD849 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		29BFE9DC25610026008FD849 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		29BFE9DF25610C7C008FD849 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		29C5A28B256FAD5200134E0C /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		29F2E2D125708F7D0071CFA9 /* GetFavMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavMusic.swift; sourceTree = "<group>"; };
 		29F6DED6256780E3001421A4 /* UIApplication+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ext.swift"; sourceTree = "<group>"; };
 		A17A9B9A8F1B3D91B975D650 /* Pods-MusicShareApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicShareApp.release.xcconfig"; path = "Target Support Files/Pods-MusicShareApp/Pods-MusicShareApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +92,7 @@
 				296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */,
 				29076B9F25692A8E001A202E /* MusicItem.swift */,
 				29076BA5256933CC001A202E /* ItunesSearchAPI.swift */,
+				29F2E2D125708F7D0071CFA9 /* GetFavMusic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,6 +108,7 @@
 		299DF2BF2563C99E00B08F37 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				29C5A28B256FAD5200134E0C /* FavoriteView.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -187,7 +191,6 @@
 		29F6DED5256780D4001421A4 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				29639478256A34F10025858D /* StackSwipableCardView.swift */,
 				29F6DED6256780E3001421A4 /* UIApplication+ext.swift */,
 				29BFE9BB2560FC7C008FD849 /* AppDelegate.swift */,
 				29BFE9BD2560FC7C008FD849 /* SceneDelegate.swift */,
@@ -328,13 +331,14 @@
 				2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */,
 				29BEB3DA25612D04006CE43D /* HomescreenView.swift in Sources */,
 				299DF2C32563C9C400B08F37 /* AccountView.swift in Sources */,
+				29F2E2D225708F7D0071CFA9 /* GetFavMusic.swift in Sources */,
 				29639481256BE14F0025858D /* CardView.swift in Sources */,
 				29076BA025692A8E001A202E /* MusicItem.swift in Sources */,
-				29639479256A34F10025858D /* StackSwipableCardView.swift in Sources */,
 				29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */,
 				29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */,
 				29BFE9DD25610026008FD849 /* HomeView.swift in Sources */,
 				29BFE9C02560FC7C008FD849 /* ContentView.swift in Sources */,
+				29C5A28C256FAD5200134E0C /* FavoriteView.swift in Sources */,
 				296F63A42566BA7A00AC7B67 /* SaveMusicData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -46,7 +46,7 @@ struct CustomTabsView: View {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
                     .frame(width: 40, height: 40, alignment: .center)
-                    .foregroundColor(Color("Color3"))
+                    .foregroundColor(Color("Color1"))
             }
             .offset(y: -25)
             

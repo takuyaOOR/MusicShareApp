@@ -130,7 +130,7 @@ struct LoginView : View {
                 ErrorView(alert: self.$alert, error: self.$error)
             }
         }
-        //キーボードオブザーブ（テキストフィールドがキーボードん隠れてしまうことの対策）
+        //キーボードオブザーブ（テキストフィールドがキーボードに隠れてしまうことの対策）
         .offset(y: -self.value)
         .animation(.spring())
         .onAppear {
@@ -205,7 +205,10 @@ struct LoginView : View {
                     if let user = snapShot.value as? [String:Any] {
                         let userName = user["userName"]
                         UserDefaults.standard.setValue(userName, forKey: "userName")
+                        print("-----------------------------")
                         print(userName!)
+                    } else {
+                        print("error")
                     }
                 }
                 
