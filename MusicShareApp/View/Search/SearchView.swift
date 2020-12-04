@@ -30,7 +30,7 @@ struct SearchView: View {
             
             //検索フィールド
             HStack(spacing: 15) {
-                TextField("アーティスト・曲名を入力してください", text: self.$title, onCommit: {
+                TextField("アーティスト名を入力してください", text: self.$title, onCommit: {
                     //入力終了時
                     //startParseを実行
                     itunesSearchAPI.startParse(keyword: title)

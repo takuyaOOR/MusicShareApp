@@ -37,9 +37,11 @@ class ItunesSearchAPI: ObservableObject {
         musicData = [MusicItem]()
         
         //iTubesSearchAPI
-        let urlString = "https://itunes.apple.com/search?term=\(keyword)&country=jp&media=music"
+        //itzyで落ちるため曲名検索のみにした
+        //後で直す
+        let urlString = "https://itunes.apple.com/search?term=\(keyword)&media=music&entity=song&attribute=artistTerm&country=jp"
         
-        //APIをエンコード
+        //APIのURLをエンコード
         let encodeUrlString:String = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         //Alamofireでリクエストを投げる

@@ -65,7 +65,7 @@ struct CardView: View {
     
                         Spacer()
     
-                        //Xボタン
+                        //nextボタン
                         Button(action: {
                             
                             withAnimation(Animation.easeIn(duration: 0.8)) {
@@ -76,16 +76,16 @@ struct CardView: View {
                             player?.pause()
     
                         }) {
-                            Image(systemName: "xmark")
+                            Image(systemName: "arrowshape.turn.up.left")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(Color("Color3"))
+                                .foregroundColor(Color.blue)
                                 .padding(20)
                                 .background((Color("Color1")))
                                 .clipShape(Circle())
                                 .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 5, y: 5)
+                                        radius: 5, x: 2, y: 2)
                                 .shadow(color: Color.white,
-                                        radius: 5, x: -5, y: -5)
+                                        radius: 5, x: -2, y: -2)
                         }
                         
                         //再生ボタン
@@ -97,14 +97,14 @@ struct CardView: View {
                         }) {
                             Image(systemName: "play")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(Color.blue)
+                                .foregroundColor(Color.green)
                                 .padding(20)
                                 .background(Color("Color1"))
                                 .clipShape(Circle())
                                 .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 5, y: 5)
+                                        radius: 5, x: 2, y: 2)
                                 .shadow(color: Color.white,
-                                        radius: 5, x: -5, y: -5)
+                                        radius: 5, x: -2, y: -2)
                         }
     
                         //◯ボタン
@@ -122,16 +122,16 @@ struct CardView: View {
                                       userID: userID as! String, userName: userName as! String)
     
                         }) {
-                            Image(systemName: "checkmark")
+                            Image(systemName: "heart")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(Color.green)
+                                .foregroundColor(Color("Color3"))
                                 .padding(20)
                                 .background(Color("Color1"))
                                 .clipShape(Circle())
                                 .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 5, y: 5)
+                                        radius: 5, x: 2, y: 2)
                                 .shadow(color: Color.white,
-                                        radius: 5, x: -5, y: -5)
+                                        radius: 5, x: -2, y: -2)
                         }
     
                         Spacer(minLength: 0)
@@ -142,7 +142,7 @@ struct CardView: View {
             }
             .frame(width: frame.size.width, height: frame.size.height - 45)
             //カードの移動距離でカード自体の色を変える
-            .background((self.ofset == 0 ? Color.white : (self.ofset > 0 ? Color.green : Color("Color3"))
+            .background((self.ofset == 0 ? Color.white : (self.ofset > 0 ? Color("Color3") : Color.blue)
                             .opacity(self.ofset != 0 ? 0.7 : 0)))
             .cornerRadius(15)
             .offset(x: self.ofset)

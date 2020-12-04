@@ -18,7 +18,6 @@ class SaveMusicData: Identifiable{
     var userName:String! = ""
     let ref:DatabaseReference!
     
-    var key:String! = ""
     
     //お気に入り保存用イニシャライザー
     init(artistName:String,musicName:String,previewUrl:String,imageUrl:String,userID:String,userName:String){
@@ -52,7 +51,7 @@ class SaveMusicData: Identifiable{
 
     }
     
-    
+    //保存用の値に変換
     func toContents()->[String:Any]{
         
         return ["artistName":artistName!,"musicName":musicName!,
@@ -61,6 +60,7 @@ class SaveMusicData: Identifiable{
         
     }
     
+    //保存
     func save(){
         ref.setValue(toContents())
     }
