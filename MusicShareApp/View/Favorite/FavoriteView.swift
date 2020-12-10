@@ -17,12 +17,9 @@ struct FavoriteView: View {
     var userName = UserDefaults.standard.object(forKey: "userName")
     
     //RealtimeDatabaseリファレンス
-    var ref = Database.database().reference()
+    @State var ref = Database.database().reference()
     
     @ObservedObject var getFavMusic = GetFavMusic()
-    
-    //お気に位置リスト用配列
-    @State var favMusicList = [SaveMusicData]()
     
     //音楽再生用変数
     @State var player:AVPlayer?
@@ -30,19 +27,35 @@ struct FavoriteView: View {
     //シェアシート表示用変数
     @State private var showActivityView: Bool = false
     
+    //背景透過用コンストラクタ
+    init(){
+        UITableView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         
         VStack(alignment: .leading) {
+            
+            HStack(spacing: 20) {
+                Spacer()
+
+                Text("Favorite")
+                    .font(.title)
+                    .fontWeight(.heavy)
+
+                Spacer()
+            }
 
             ScrollView(.vertical, showsIndicators: false){
+
                 ForEach(getFavMusic.favMusicData){music in
                     HStack {
-                        
+
                         //画像表示
                         WebImage(url: URL(string: music.imageUrl))
                             .resizable()
                             .frame(width: 130, height: 130, alignment: .center)
-                        
+
                         //音楽情報表示
                         VStack {
                             Text(music.musicName)
@@ -72,7 +85,7 @@ struct FavoriteView: View {
                                     playMusic(url: music.previewUrl)
 
                                 }) {
-                                    
+
                                     Image(systemName: "play")
                                         .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(Color.green)
@@ -83,14 +96,14 @@ struct FavoriteView: View {
                                                 radius: 5, x: 2, y: 2)
                                         .shadow(color: Color.white,
                                                 radius: 5, x: -2, y: -2)
-                                    
+
                                 }
-                                
+
                                 //シェアボタン
                                 Button(action: {
-                                    
+
                                     actionSheet(musicName: music.musicName, artistName: music.artistName, previewUrl: music.previewUrl)
-                                    
+
                                 }) {
                                     Image(systemName: "square.and.arrow.up")
                                         .font(.system(size: 10, weight: .bold))
@@ -103,15 +116,17 @@ struct FavoriteView: View {
                                         .shadow(color: Color.white,
                                                 radius: 5, x: -2, y: -2)
                                 }
-                                
+
                                 //お気に入り削除ボタン
                                 Button(action: {
-                                    
+
                                     //お気に入りリストから削除
-                                    getFavMusic.deleteFavoriteMusic(ref: ref, userID: userID as! String, imageURL: music.imageUrl)
+                                    getFavMusic.deleteFavoriteMusic(ref: ref, userID: userID as! String, trackID: music.trackID)
+                                    //お気に入りリストを初期化
+                                    getFavMusic.favMusicData.removeAll()
                                     
                                 }) {
-                                    
+
                                     Image(systemName: "heart.slash")
                                         .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(Color("Color3"))
@@ -122,7 +137,6 @@ struct FavoriteView: View {
                                                 radius: 5, x: 2, y: 2)
                                         .shadow(color: Color.white,
                                                 radius: 5, x: -2, y: -2)
-                                    
                                 }
 
                                 Spacer()
@@ -140,7 +154,9 @@ struct FavoriteView: View {
                     .padding(.horizontal, 25)
                     .padding(.top, 15)
                     .padding(.bottom, 10)
+
                 }
+
             }
 
             Spacer()
@@ -149,14 +165,14 @@ struct FavoriteView: View {
         //このビューが読み込まれたらお気に入りミュージックを取得
         .onAppear {
             getFavMusic.fetchFavoriteMusic(ref: ref, userID: userID as! String)
+            print("favViewが呼び出されました")
         }
     }
     
+    
     //音楽再生用メソッド
     func playMusic(url: String) {
-        
         let url = URL(string: url)
-        
         let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
         player = AVPlayer(playerItem: playerItem)
         player?.play()
@@ -166,6 +182,7 @@ struct FavoriteView: View {
     //シェアシート
     func actionSheet(musicName: String, artistName: String, previewUrl: String) {
         let data: String = "\(artistName) : \(musicName) \n視聴用URL : \(previewUrl)"
+        
         let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }

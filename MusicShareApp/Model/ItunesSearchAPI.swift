@@ -15,6 +15,7 @@ import Combine
 class ItunesSearchAPI: ObservableObject {
     
     //楽曲情報保存用配列
+    @Published var trackIDArray = [String]()
     @Published var musicNameArray = [String]()
     @Published var artistNameArray = [String]()
     @Published var previewUrlArray = [String]()
@@ -29,6 +30,7 @@ class ItunesSearchAPI: ObservableObject {
         HUD.show(.progress)
         
         //配列の初期化
+        trackIDArray = [String]()
         musicNameArray = [String]()
         artistNameArray = [String]()
         previewUrlArray = [String]()
@@ -37,8 +39,6 @@ class ItunesSearchAPI: ObservableObject {
         musicData = [MusicItem]()
         
         //iTubesSearchAPI
-        //itzyで落ちるため曲名検索のみにした
-        //後で直す
         let urlString = "https://itunes.apple.com/search?term=\(keyword)&media=music&entity=song&attribute=artistTerm&country=jp"
         
         //APIのURLをエンコード
@@ -61,6 +61,9 @@ class ItunesSearchAPI: ObservableObject {
                 //検索件数分繰り返す
                 for i in 0 ..< resultCount{
                     
+                    //Memo .stringValue と .stringは動きが違う
+                    //.stringValueはIntをstringに型変換するときに使う
+                    let trackID = json["results"][i]["trackId"].stringValue
                     var artWorkUrl = json["results"][i]["artworkUrl100"].string
                     let previewUrl = json["results"][i]["previewUrl"].string
                     let artistName = json["results"][i]["artistName"].string
@@ -72,12 +75,14 @@ class ItunesSearchAPI: ObservableObject {
                     }
                     
                     //保存用配列に代入
+                    self.trackIDArray.append(trackID)
                     self.musicNameArray.append(trackCensoredName!)
                     self.artistNameArray.append(artistName!)
                     self.previewUrlArray.append(previewUrl!)
                     self.imageStringArray.append(artWorkUrl!)
                     
-                    musicData.append(MusicItem(musicName: trackCensoredName!,
+                    musicData.append(MusicItem(trackID: trackID,
+                                               musicName: trackCensoredName!,
                                                artistName: artistName!,
                                                previewUrl: previewUrl!,
                                                imageUrl: artWorkUrl!))

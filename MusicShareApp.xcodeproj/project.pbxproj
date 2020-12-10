@@ -10,6 +10,7 @@
 		29076BA025692A8E001A202E /* MusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076B9F25692A8E001A202E /* MusicItem.swift */; };
 		29076BA6256933CC001A202E /* ItunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076BA5256933CC001A202E /* ItunesSearchAPI.swift */; };
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
+		2956C37D257CF5B00030A8E6 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2956C37C257CF5B00030A8E6 /* PostView.swift */; };
 		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
 		29639481256BE14F0025858D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639480256BE14F0025858D /* CardView.swift */; };
 		296F63A42566BA7A00AC7B67 /* SaveMusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */; };
@@ -39,6 +40,7 @@
 		29076B9F25692A8E001A202E /* MusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicItem.swift; sourceTree = "<group>"; };
 		29076BA5256933CC001A202E /* ItunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesSearchAPI.swift; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
+		2956C37C257CF5B00030A8E6 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
 		29639480256BE14F0025858D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		296F63A32566BA7A00AC7B67 /* SaveMusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMusicData.swift; sourceTree = "<group>"; };
@@ -83,6 +85,14 @@
 				A17A9B9A8F1B3D91B975D650 /* Pods-MusicShareApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2956C376257CF5390030A8E6 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				2956C37C257CF5B00030A8E6 /* PostView.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		295AA957256570510024C34F /* Model */ = {
@@ -175,6 +185,7 @@
 			children = (
 				299DF2C12563C9AB00B08F37 /* Home */,
 				299DF2C02563C9A400B08F37 /* Search */,
+				2956C376257CF5390030A8E6 /* Post */,
 				299DF2BF2563C99E00B08F37 /* Favorite */,
 				299DF2BE2563C99700B08F37 /* Account */,
 				29BFE9BF2560FC7C008FD849 /* ContentView.swift */,
@@ -339,6 +350,7 @@
 				29BFE9DD25610026008FD849 /* HomeView.swift in Sources */,
 				29BFE9C02560FC7C008FD849 /* ContentView.swift in Sources */,
 				29C5A28C256FAD5200134E0C /* FavoriteView.swift in Sources */,
+				2956C37D257CF5B00030A8E6 /* PostView.swift in Sources */,
 				296F63A42566BA7A00AC7B67 /* SaveMusicData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,22 +20,27 @@ struct HomescreenView : View {
                 //タブ切り替え
                 if self.index == 0 {
                     //ホーム画面
-                    Text("Home")
-                    Color("Color1").opacity(0.1)
+                    Color.white
                         .edgesIgnoringSafeArea(.top)
+                    Text("Home")
                 } else if self.index == 1 {
                     //検索画面
-                    Color("Color1").opacity(0.1)
+                    Color.white
                         .edgesIgnoringSafeArea(.top)
                     SearchView()
                 } else if self.index == 2 {
+                    //投稿画面
+                    Color.white
+                        .edgesIgnoringSafeArea(.top)
+                    PostView()
+                } else if self.index == 3 {
                     //お気に入り画面
-                    Color("Color1").opacity(0.1)
+                    Color.white
                         .edgesIgnoringSafeArea(.top)
                     FavoriteView()
-                } else{
+                } else {
                     //アカウント画面
-                    Color("Color1").opacity(0.1)
+                    Color.white
                         .edgesIgnoringSafeArea(.top)
                     AccountView()
                 }

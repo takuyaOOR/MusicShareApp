@@ -13,6 +13,7 @@ import Firebase
 struct CardView: View {
     
     //音楽情報受け取り用変数
+    @State var trackID: String
     @State var musicName: String
     @State var artistName: String
     @State var previewUrl: String
@@ -117,7 +118,8 @@ struct CardView: View {
                             //音楽を止める
                             player?.pause()
                             //お気に入り処理
-                            saveMusic(artistName: artistName, musicName: musicName,
+                            saveMusic(trackID: trackID, artistName: artistName,
+                                      musicName: musicName,
                                       previewUrl: previewUrl, imageUrl: imageUrl,
                                       userID: userID as! String, userName: userName as! String)
     
@@ -144,7 +146,12 @@ struct CardView: View {
             //カードの移動距離でカード自体の色を変える
             .background((self.ofset == 0 ? Color.white : (self.ofset > 0 ? Color("Color3") : Color.blue)
                             .opacity(self.ofset != 0 ? 0.7 : 0)))
+            
             .cornerRadius(15)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color("Color1"), lineWidth: 1)
+            )
             .offset(x: self.ofset)
             //回転して動かす
             .rotationEffect(.init(degrees: (self.ofset) == 0 ? 0 : (self.ofset > 0 ? 12 : -12)))
@@ -164,9 +171,11 @@ struct CardView: View {
                                 //音楽を止める
                                 player?.pause()
 //                                //お気に入り処理
-                                saveMusic(artistName: artistName, musicName: musicName,
+                                saveMusic(trackID: trackID, artistName: artistName,
+                                          musicName: musicName,
                                           previewUrl: previewUrl, imageUrl: imageUrl,
-                                          userID: userID as! String, userName: userName as! String)
+                                          userID: userID as! String,
+                                          userName: userName as! String)
                                 
                             }
                             //Rejectedジャスチャー
@@ -199,12 +208,13 @@ struct CardView: View {
         
     }
     
-    func saveMusic(artistName: String, musicName: String,
+    func saveMusic(trackID:String, artistName: String, musicName: String,
                    previewUrl: String, imageUrl: String,
                    userID: String, userName: String) {
         
-        let saveMusicData = SaveMusicData(artistName: artistName, musicName: musicName,
-                                          previewUrl: previewUrl, imageUrl: imageUrl,
+        let saveMusicData = SaveMusicData(trackID: trackID,artistName: artistName,
+                                          musicName: musicName,previewUrl: previewUrl,
+                                          imageUrl: imageUrl,
                                           userID: userID, userName: userName)
         
         saveMusicData.save()

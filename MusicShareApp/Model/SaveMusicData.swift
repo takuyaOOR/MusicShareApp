@@ -10,6 +10,7 @@ import Firebase
 
 class SaveMusicData: Identifiable{
     
+    var trackID:String! = ""
     var artistName:String! = ""
     var musicName:String! = ""
     var previewUrl:String! = ""
@@ -20,8 +21,9 @@ class SaveMusicData: Identifiable{
     
     
     //お気に入り保存用イニシャライザー
-    init(artistName:String,musicName:String,previewUrl:String,imageUrl:String,userID:String,userName:String){
+    init(trackID:String,artistName:String,musicName:String,previewUrl:String,imageUrl:String,userID:String,userName:String){
         
+        self.trackID = trackID
         self.artistName = artistName
         self.musicName = musicName
         self.previewUrl = previewUrl
@@ -30,8 +32,9 @@ class SaveMusicData: Identifiable{
         self.userName = userName
         
         //ログインのときに拾えるuidを先頭につけて送信　受信するときもuidから引っ張ってくる
-        
-        ref = Database.database().reference().child("users").child(userID).childByAutoId()
+        //users配下にuserIDでお気に入り音楽分ける
+        //更にtrackIdで曲を分ける
+        ref = Database.database().reference().child("users").child(userID).child(trackID)
         
     }
     
@@ -40,7 +43,8 @@ class SaveMusicData: Identifiable{
 
         ref = snapshot.ref
         if let value = snapshot.value as? [String:Any]{
-
+            
+            trackID = value["trackID"] as? String
             artistName =  value["artistName"] as? String
             musicName =  value["musicName"] as? String
             imageUrl =  value["imageUrl"] as? String
@@ -54,7 +58,7 @@ class SaveMusicData: Identifiable{
     //保存用の値に変換
     func toContents()->[String:Any]{
         
-        return ["artistName":artistName!,"musicName":musicName!,
+        return ["trackID":trackID!,"artistName":artistName!,"musicName":musicName!,
                 "previewUrl":previewUrl!,"imageUrl":imageUrl!,
                 "userID": userID!,"userName":userName!]
         

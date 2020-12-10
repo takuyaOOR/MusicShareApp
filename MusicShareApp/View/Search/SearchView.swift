@@ -56,7 +56,7 @@ struct SearchView: View {
                     ZStack {
                         ForEach(itunesSearchAPI.musicData.reversed()) {music in
                             //Card View
-                            CardView(musicName: music.musicName,
+                            CardView(trackID: music.trackID, musicName: music.musicName,
                                      artistName: music.artistName,
                                      previewUrl: music.previewUrl,
                                      imageUrl: music.imageUrl,
