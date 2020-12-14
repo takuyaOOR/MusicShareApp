@@ -102,7 +102,10 @@ struct FavoriteView: View {
                                 //シェアボタン
                                 Button(action: {
 
-                                    actionSheet(musicName: music.musicName, artistName: music.artistName, previewUrl: music.previewUrl)
+                                    actionSheet(musicName: music.musicName,
+                                                artistName: music.artistName,
+                                                previewUrl: music.previewUrl,
+                                                imageUrl: music.imageUrl)
 
                                 }) {
                                     Image(systemName: "square.and.arrow.up")
@@ -180,10 +183,17 @@ struct FavoriteView: View {
     }
     
     //シェアシート
-    func actionSheet(musicName: String, artistName: String, previewUrl: String) {
+    func actionSheet(musicName: String, artistName: String, previewUrl: String, imageUrl: String) {
+        //楽曲情報と視聴用URL
         let data: String = "\(artistName) : \(musicName) \n視聴用URL : \(previewUrl)"
         
-        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        //画像
+        let imageData = try? Data(contentsOf: URL(string: imageUrl)!)
+        let image = UIImage(data: imageData!)
+        
+        let item = [image, data] as [Any]
+        
+        let av = UIActivityViewController(activityItems: item, applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 
