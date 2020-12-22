@@ -83,10 +83,6 @@ struct CardView: View {
                                 .padding(20)
                                 .background((Color("Color1")))
                                 .clipShape(Circle())
-                                .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 2, y: 2)
-                                .shadow(color: Color.white,
-                                        radius: 5, x: -2, y: -2)
                         }
                         
                         //再生ボタン
@@ -102,10 +98,6 @@ struct CardView: View {
                                 .padding(20)
                                 .background(Color("Color1"))
                                 .clipShape(Circle())
-                                .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 2, y: 2)
-                                .shadow(color: Color.white,
-                                        radius: 5, x: -2, y: -2)
                         }
     
                         //◯ボタン
@@ -130,10 +122,6 @@ struct CardView: View {
                                 .padding(20)
                                 .background(Color("Color1"))
                                 .clipShape(Circle())
-                                .shadow(color: Color("Color1").opacity(0.6),
-                                        radius: 5, x: 2, y: 2)
-                                .shadow(color: Color.white,
-                                        radius: 5, x: -2, y: -2)
                         }
     
                         Spacer(minLength: 0)

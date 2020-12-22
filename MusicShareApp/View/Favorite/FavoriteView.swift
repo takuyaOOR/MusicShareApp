@@ -55,9 +55,11 @@ struct FavoriteView: View {
                         WebImage(url: URL(string: music.imageUrl))
                             .resizable()
                             .frame(width: 130, height: 130, alignment: .center)
+                            .cornerRadius(12)
 
                         //音楽情報表示
                         VStack {
+                            
                             Text(music.musicName)
                                 .font(.system(size: 15))
                                 .foregroundColor(Color("Color1"))
@@ -92,10 +94,6 @@ struct FavoriteView: View {
                                         .padding(12)
                                         .background(Color("Color1"))
                                         .clipShape(Circle())
-                                        .shadow(color: Color("Color1").opacity(0.6),
-                                                radius: 5, x: 2, y: 2)
-                                        .shadow(color: Color.white,
-                                                radius: 5, x: -2, y: -2)
 
                                 }
 
@@ -114,10 +112,6 @@ struct FavoriteView: View {
                                         .padding(12)
                                         .background(Color("Color1"))
                                         .clipShape(Circle())
-                                        .shadow(color: Color("Color1").opacity(0.6),
-                                                radius: 5, x: 2, y: 2)
-                                        .shadow(color: Color.white,
-                                                radius: 5, x: -2, y: -2)
                                 }
 
                                 //お気に入り削除ボタン
@@ -136,10 +130,6 @@ struct FavoriteView: View {
                                         .padding(12)
                                         .background(Color("Color1"))
                                         .clipShape(Circle())
-                                        .shadow(color: Color("Color1").opacity(0.6),
-                                                radius: 5, x: 2, y: 2)
-                                        .shadow(color: Color.white,
-                                                radius: 5, x: -2, y: -2)
                                 }
 
                                 Spacer()
@@ -150,10 +140,10 @@ struct FavoriteView: View {
                     }
                     .background(Color.white)
                     .cornerRadius(15)
-                    .shadow(color: Color("Color1").opacity(0.6),
-                            radius: 5, x: 2, y: 2)
-                    .shadow(color: Color.white,
-                            radius: 5, x: -2, y: -2)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color("Color1"), lineWidth: 1)
+                    )
                     .padding(.horizontal, 25)
                     .padding(.top, 15)
                     .padding(.bottom, 10)
@@ -182,6 +172,7 @@ struct FavoriteView: View {
         
     }
     
+    
     //シェアシート
     func actionSheet(musicName: String, artistName: String, previewUrl: String, imageUrl: String) {
         //楽曲情報と視聴用URL
@@ -191,6 +182,7 @@ struct FavoriteView: View {
         let imageData = try? Data(contentsOf: URL(string: imageUrl)!)
         let image = UIImage(data: imageData!)
         
+        //楽曲情報とimageを配列に保存
         let item = [image, data] as [Any]
         
         let av = UIActivityViewController(activityItems: item, applicationActivities: nil)
