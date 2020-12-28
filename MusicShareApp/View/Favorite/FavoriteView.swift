@@ -157,8 +157,8 @@ struct FavoriteView: View {
         .padding(.vertical, 35)
         //このビューが読み込まれたらお気に入りミュージックを取得
         .onAppear {
+            
             getFavMusic.fetchFavoriteMusic(ref: ref, userID: userID as! String)
-            print("favViewが呼び出されました")
         }
     }
     

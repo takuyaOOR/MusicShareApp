@@ -11,8 +11,14 @@ import SDWebImageSwiftUI
 
 struct PostView: View {
     
+    //お気に入り音楽情報を受け取って保存する配列
     @State var selected: [favMusics] = []
+    
+    //お気に入り選択画面を表示、非表示するための変数
     @State var show: Bool = false
+    
+    //コメント投稿画面を表示、非表示するための変数
+    @State var showCommentView = false
     
     var body: some View {
         
@@ -32,8 +38,6 @@ struct PostView: View {
                 }
                 .padding(.top, 30)
                 
-                Spacer()
-                
                 //選択済みの画像が空じゃなかったら
                 if !self.selected.isEmpty {
 
@@ -47,7 +51,7 @@ struct PostView: View {
                                     
                                     WebImage(url: URL(string: music.imageUrl))
                                         .resizable()
-                                        .frame(width: 250, height: 250)
+                                        .frame(width: 320, height: 320)
                                         .cornerRadius(15)
                                         
                                     Text(music.musicName)
@@ -69,8 +73,10 @@ struct PostView: View {
                             }
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 25)
                 }
+                
+                Spacer()
                 
                 Button(action: {
                     
@@ -91,6 +97,7 @@ struct PostView: View {
                     
                     Button(action: {
                         
+                        self.showCommentView = true
                     }) {
                         
                         Text("次へ")
@@ -105,8 +112,10 @@ struct PostView: View {
                 
                 Spacer()
             }
-            
-            
+            .sheet(isPresented: self.$showCommentView) {
+                
+                CommentView(showCommentView: self.$showCommentView)
+            }
             
             if self.show {
 
@@ -116,10 +125,13 @@ struct PostView: View {
     }
 }
 
+//お気に入り音楽選択画面
 struct CustomPicker: View {
     
     //選択された画像を受け果たすための配列
     @Binding var selected: [favMusics]
+    
+    //お気に入り選択画面を表示、非表示するための変数
     @Binding var show: Bool
     
     //すでに選択済みか判定するための配列
@@ -165,7 +177,6 @@ struct CustomPicker: View {
                                     
                                     Button(action: {
                                         
-                                        
                                         //選択済みに追加していく
                                         //未選択なら配列に追加
                                         if self.selectedMusic.contains("\(music.trackID!)") == false {
@@ -191,7 +202,6 @@ struct CustomPicker: View {
                                             //selectedMusicとselectedからdelIndexの要素を削除
                                             self.selectedMusic.remove(at: delIndex!)
                                             self.favItem.remove(at: delIndex!)
-                                            print(delIndex!)
                                         }
                                         
                                         print("-----------------------------------")
@@ -306,6 +316,110 @@ struct CustomPicker: View {
 
         getFavMusic.fetchFavoriteMusic(ref: ref, userID: userID as! String)
     }
+}
+
+//投稿文追加画像
+struct CommentView: View {
+    
+    @State var text = ""
+    
+    @Binding var showCommentView: Bool
+    
+    var body: some View {
+        
+        VStack(spacing: 15) {
+            
+            MultiLineTF(text: $text)
+                .border(Color.gray.opacity(0.5), width: 1)
+            
+            HStack {
+                
+                //戻るボタン
+                Button(action: {
+                    
+                    self.showCommentView.toggle()
+                }) {
+                    
+                    Text("戻る")
+                        .padding()
+                }
+                .background(Color("Color1"))
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+                
+                //投稿ボタン
+                Button(action: {
+                    
+                    print(self.text)
+                }) {
+                    
+                    Text("投稿")
+                        .padding()
+                }
+                .background(Color("Color3"))
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+                //空白(スペース含む)でないか判定
+                //投稿文が入力されていたら投稿ボタンを押せるようにする
+                .disabled(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? true : false)
+                .opacity(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? 0.5 : 1)
+            }
+        }
+        .padding()
+    }
+}
+
+//投稿画面のMultiLineTextField用
+struct MultiLineTF: UIViewRepresentable {
+    
+    @Binding var text: String
+    
+    func makeCoordinator() -> Coordinator {
+        
+        return MultiLineTF.Coordinator(parent1: self)
+    }
+    
+    func makeUIView(context: Context) -> UITextView {
+        
+        let txview = UITextView()
+        
+        //編集、タップ、スクロールを有効にする
+        txview.isEditable = true
+        txview.isUserInteractionEnabled = true
+        txview.isScrollEnabled = true
+        txview.text = "投稿文を入力"
+        txview.textColor = .gray
+        txview.font = .systemFont(ofSize: 20)
+        txview.delegate = context.coordinator
+        
+        return txview
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+    
+    class Coordinator: NSObject, UITextViewDelegate {
+        
+        var parent: MultiLineTF
+        
+        init(parent1: MultiLineTF) {
+            
+            parent = parent1
+        }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            
+            self.parent.text = textView.text
+        }
+        
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            
+            textView.text = ""
+            textView.textColor = .label
+        }
+    }
+    
 }
 
 //選択された画像用
