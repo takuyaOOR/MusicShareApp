@@ -10,6 +10,7 @@
 		29076BA025692A8E001A202E /* MusicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076B9F25692A8E001A202E /* MusicItem.swift */; };
 		29076BA6256933CC001A202E /* ItunesSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29076BA5256933CC001A202E /* ItunesSearchAPI.swift */; };
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
+		2926F6DE2599CE24002CCE99 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926F6DD2599CE24002CCE99 /* MainView.swift */; };
 		2956C37D257CF5B00030A8E6 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2956C37C257CF5B00030A8E6 /* PostView.swift */; };
 		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
 		29639481256BE14F0025858D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639480256BE14F0025858D /* CardView.swift */; };
@@ -40,6 +41,7 @@
 		29076B9F25692A8E001A202E /* MusicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicItem.swift; sourceTree = "<group>"; };
 		29076BA5256933CC001A202E /* ItunesSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesSearchAPI.swift; sourceTree = "<group>"; };
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
+		2926F6DD2599CE24002CCE99 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2956C37C257CF5B00030A8E6 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
 		29639480256BE14F0025858D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		299DF2C12563C9AB00B08F37 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2926F6DD2599CE24002CCE99 /* MainView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F6DED7256780E4001421A4 /* UIApplication+ext.swift in Sources */,
+				2926F6DE2599CE24002CCE99 /* MainView.swift in Sources */,
 				29BFE9E025610C7C008FD849 /* SignupView.swift in Sources */,
 				29BFE9BC2560FC7C008FD849 /* AppDelegate.swift in Sources */,
 				29076BA6256933CC001A202E /* ItunesSearchAPI.swift in Sources */,

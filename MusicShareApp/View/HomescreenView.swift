@@ -22,7 +22,7 @@ struct HomescreenView : View {
                     //ホーム画面
                     Color.white
                         .edgesIgnoringSafeArea(.top)
-                    Text("Home")
+                    MainView()
                 } else if self.index == 1 {
                     //検索画面
                     Color.white

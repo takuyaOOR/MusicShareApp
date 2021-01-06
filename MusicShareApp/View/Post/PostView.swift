@@ -112,11 +112,13 @@ struct PostView: View {
                 
                 Spacer()
             }
-            .sheet(isPresented: self.$showCommentView) {
+            //投稿文追加画面を表示
+            .fullScreenCover(isPresented: self.$showCommentView) {
                 
-                CommentView(showCommentView: self.$showCommentView)
+                CommentView(showCommentView: self.$showCommentView, selectedMusic: self.$selected)
             }
             
+            //お気に入り音楽選択画面を表示
             if self.show {
 
                 CustomPicker(selected: self.$selected, show: self.$show)
@@ -204,9 +206,6 @@ struct CustomPicker: View {
                                             self.favItem.remove(at: delIndex!)
                                         }
                                         
-                                        print("-----------------------------------")
-                                        print(self.selectedMusic)
-                                        print(self.favItem)
                                     }) {
                                         
                                         //画像が選択済みならチェックマークを重ねる
@@ -284,6 +283,8 @@ struct CustomPicker: View {
                         .background(Color("Color3"))
                         .clipShape(Capsule())
                         .padding(.bottom, 10)
+                        .disabled(self.selectedMusic.count == 0 ? true : false)
+                        .opacity(self.selectedMusic.count == 0 ? 0.5 : 1)
                         
                     }
                     .frame(width: UIScreen.main.bounds.width - 40,
@@ -321,9 +322,24 @@ struct CustomPicker: View {
 //投稿文追加画像
 struct CommentView: View {
     
+    //投稿文保存用変数
     @State var text = ""
     
+    //コメントビューの表示非表示の切り替え用変数
     @Binding var showCommentView: Bool
+    
+    //投稿用お気に入り音楽保存用変数
+    @Binding var selectedMusic: [favMusics]
+    
+    //アラート表示用変数
+    @State var showAlert = false
+    
+    //投稿ボタン押下後HOME画面に戻す用の変数
+    @State var showHomeView = false
+    
+    //ユーザーIDとユーザーネームをUserdefaultから取得
+    var userID = UserDefaults.standard.object(forKey: "userID")
+    var userName = UserDefaults.standard.object(forKey: "userName")
     
     var body: some View {
         
@@ -342,6 +358,7 @@ struct CommentView: View {
                     
                     Text("戻る")
                         .padding()
+                        .padding(.horizontal)
                 }
                 .background(Color("Color1"))
                 .foregroundColor(.white)
@@ -350,11 +367,38 @@ struct CommentView: View {
                 //投稿ボタン
                 Button(action: {
                     
-                    print(self.text)
+                    print("投稿ボタン押下")
+                    
+                    // 現在日時を取得
+                    let now = Date()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMdkHms", options: 0, locale: Locale(identifier: "ja_JP"))
+                    print(dateFormatter.string(from: now))
+                    
+                    //ユーザーの投稿内容ごとに分けるためのユニークな文字列
+                    //ChildByAutoIDはStringにキャストできなかった
+                    let autoID = UUID().uuidString
+                    
+                    //配列に存在するだけ投稿内容として保存
+                    for i in self.selectedMusic {
+
+                        let savePostData = SaveMusicData(trackID: i.trackID, artistName: i.artistName,
+                                                         musicName: i.musicName, imageUrl: i.imageUrl,
+                                                         userID: userID as! String, userName: userName as! String,
+                                                         post: text,date: dateFormatter.string(from: now),
+                                                         autoID: autoID)
+
+                        savePostData.savePost()
+                    }
+                    
+                    //アラートを表示
+                    self.showAlert.toggle()
+                    
                 }) {
                     
                     Text("投稿")
                         .padding()
+                        .padding(.horizontal)
                 }
                 .background(Color("Color3"))
                 .foregroundColor(.white)
@@ -363,6 +407,18 @@ struct CommentView: View {
                 //投稿文が入力されていたら投稿ボタンを押せるようにする
                 .disabled(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? true : false)
                 .opacity(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? 0.5 : 1)
+            }
+            //alertView
+            .alert(isPresented: self.$showAlert) {
+                Alert(title: Text("投稿が完了しました"), message: Text(""),
+                      dismissButton: .default(Text("OK"), action: {
+                        self.showHomeView.toggle()
+                      }))
+            }
+            //HOMW画面を表示
+            .fullScreenCover(isPresented: self.$showHomeView) {
+                
+                HomescreenView()
             }
         }
         .padding()
@@ -422,7 +478,8 @@ struct MultiLineTF: UIViewRepresentable {
     
 }
 
-//選択された画像用
+
+//選択された画像用構造体
 struct favMusics: Identifiable {
     var id = UUID()
     var trackID: String

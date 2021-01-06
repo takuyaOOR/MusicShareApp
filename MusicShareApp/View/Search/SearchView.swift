@@ -18,9 +18,6 @@ struct SearchView: View {
     
     @ObservedObject var itunesSearchAPI = ItunesSearchAPI()
     
-    @State var alert = false
-    @State var error = ""
-    
     //キーボードオブザーブ用変数
     @State var value: CGFloat = 0
     

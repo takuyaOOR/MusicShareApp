@@ -17,8 +17,15 @@ class SaveMusicData: Identifiable{
     var imageUrl:String! = ""
     var userID:String! = ""
     var userName:String! = ""
-    let ref:DatabaseReference!
+    var post: String! = ""
     
+    //投稿日時
+    var nowDate: String! = ""
+    
+    //投稿内容を分ける用
+    var autoID: String = ""
+    
+    let ref:DatabaseReference!
     
     //お気に入り保存用イニシャライザー
     init(trackID:String,artistName:String,musicName:String,previewUrl:String,imageUrl:String,userID:String,userName:String){
@@ -64,9 +71,33 @@ class SaveMusicData: Identifiable{
         
     }
     
-    //保存
+    //お気に入り保存
     func save(){
         ref.setValue(toContents())
+    }
+    
+    //投稿データ保存用イニシャライザー
+    init(trackID:String,artistName:String,musicName:String,imageUrl:String,userID:String,userName:String,post: String, date: String,autoID: String) {
+        
+        self.trackID = trackID
+        self.artistName = artistName
+        self.musicName = musicName
+        self.imageUrl = imageUrl
+        self.userID = userID
+        self.userName = userName
+        self.post = post
+        self.nowDate = date
+        self.autoID = autoID
+        
+        ref = Database.database().reference().child("posts").child(userID).child(autoID).child(trackID)
+    }
+    
+    //投稿データ保存
+    func savePost() {
+        
+        ref.setValue(["trackID":trackID!,"artistName":artistName!,"musicName":musicName!,
+                      "previewUrl":previewUrl!,"imageUrl":imageUrl!,
+                      "userID": userID!,"userName":userName!,"date":nowDate!,"post":post!])
     }
     
 }
