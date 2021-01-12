@@ -343,85 +343,136 @@ struct CommentView: View {
     
     var body: some View {
         
-        VStack(spacing: 15) {
+        ZStack {
             
-            MultiLineTF(text: $text)
-                .border(Color.gray.opacity(0.5), width: 1)
-            
-            HStack {
+            VStack(spacing: 15) {
                 
-                //戻るボタン
-                Button(action: {
-                    
-                    self.showCommentView.toggle()
-                }) {
-                    
-                    Text("戻る")
-                        .padding()
-                        .padding(.horizontal)
-                }
-                .background(Color("Color1"))
-                .foregroundColor(.white)
-                .clipShape(Capsule())
+                MultiLineTF(text: $text)
+                    .border(Color.gray.opacity(0.5), width: 1)
                 
-                //投稿ボタン
-                Button(action: {
+                HStack {
                     
-                    print("投稿ボタン押下")
-                    
-                    // 現在日時を取得
-                    let now = Date()
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMdkHms", options: 0, locale: Locale(identifier: "ja_JP"))
-                    print(dateFormatter.string(from: now))
-                    
-                    //ユーザーの投稿内容ごとに分けるためのユニークな文字列
-                    //ChildByAutoIDはStringにキャストできなかった
-                    let autoID = UUID().uuidString
-                    
-                    //配列に存在するだけ投稿内容として保存
-                    for i in self.selectedMusic {
-
-                        let savePostData = SaveMusicData(trackID: i.trackID, artistName: i.artistName,
-                                                         musicName: i.musicName, imageUrl: i.imageUrl,
-                                                         userID: userID as! String, userName: userName as! String,
-                                                         post: text,date: dateFormatter.string(from: now),
-                                                         autoID: autoID)
-
-                        savePostData.savePost()
+                    //戻るボタン
+                    Button(action: {
+                        
+                        self.showCommentView.toggle()
+                    }) {
+                        
+                        Text("戻る")
+                            .padding()
+                            .padding(.horizontal)
                     }
+                    .background(Color("Color1"))
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
                     
-                    //アラートを表示
-                    self.showAlert.toggle()
-                    
-                }) {
-                    
-                    Text("投稿")
-                        .padding()
-                        .padding(.horizontal)
+                    //投稿ボタン
+                    Button(action: {
+                        
+                        print("投稿ボタン押下")
+                        
+                        // 現在日時を取得
+                        let now = Date()
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMdkHms", options: 0, locale: Locale(identifier: "ja_JP"))
+                        print(dateFormatter.string(from: now))
+                        
+                        //ユーザーの投稿内容ごとに分けるためのユニークな文字列
+                        //ChildByAutoIDはStringにキャストできなかった
+//                        let autoID = UUID().uuidString
+                        
+                        //配列に存在するだけ投稿内容として保存
+                        for i in self.selectedMusic {
+
+                            let savePostData = SavePostData(trackID: i.trackID, artistName: i.artistName,
+                                                             musicName: i.musicName, imageUrl: i.imageUrl,
+                                                             userID: userID as! String, userName: userName as! String,
+                                                             post: text,date: dateFormatter.string(from: now))
+
+                            savePostData.savePost()
+                        }
+                        
+                        //アラートを表示
+                        withAnimation {
+                            
+                            self.showAlert.toggle()
+                        }
+                        
+                    }) {
+                        
+                        Text("投稿")
+                            .padding()
+                            .padding(.horizontal)
+                    }
+                    .background(Color("Color3"))
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    //空白(スペース含む)でないか判定
+                    //投稿文が入力されていたら投稿ボタンを押せるようにする
+                    .disabled(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? true : false)
+                    .opacity(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? 0.5 : 1)
                 }
-                .background(Color("Color3"))
-                .foregroundColor(.white)
-                .clipShape(Capsule())
-                //空白(スペース含む)でないか判定
-                //投稿文が入力されていたら投稿ボタンを押せるようにする
-                .disabled(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? true : false)
-                .opacity(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? 0.5 : 1)
+                //AlertView
+//                .alert(isPresented: self.$showAlert) {
+//                    Alert(title: Text("投稿が完了しました"), message: Text(""),
+//                          dismissButton: .default(Text("OK"), action: {
+//                            self.showHomeView.toggle()
+//                          }))
+//                }
+                //HOMW画面を表示
+                .fullScreenCover(isPresented: self.$showHomeView) {
+                    
+                    HomescreenView()
+                }
             }
-            //alertView
-            .alert(isPresented: self.$showAlert) {
-                Alert(title: Text("投稿が完了しました"), message: Text(""),
-                      dismissButton: .default(Text("OK"), action: {
-                        self.showHomeView.toggle()
-                      }))
-            }
-            //HOMW画面を表示
-            .fullScreenCover(isPresented: self.$showHomeView) {
-                
-                HomescreenView()
+            .padding()
+            
+            if self.showAlert {
+                CustomAlertView(showAlert: $showAlert, showHomeView: $showHomeView)
             }
         }
-        .padding()
+    }
+}
+
+//CustomAlertView
+struct CustomAlertView: View {
+    
+    @Binding var showAlert: Bool
+    
+    @Binding var showHomeView: Bool
+    
+    var body: some View {
+            
+        VStack(spacing: 15) {
+            
+            Image(systemName: "checkmark.circle")
+                .resizable()
+                .frame(width: 150, height: 150)
+                .foregroundColor(Color("Color3"))
+            
+            Text("投稿が完了しました")
+                .font(.title)
+                .foregroundColor(Color("Color1"))
+            
+            Button(action: {
+                
+                self.showHomeView.toggle()
+            }) {
+                
+                Text("OK")
+                    .foregroundColor(Color("Color1"))
+                    .padding()
+                    .padding(.horizontal)
+                    .background(Color("Color3"))
+                    .clipShape(Capsule())
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width,
+               height: UIScreen.main.bounds.height)
+        .padding(.vertical, 50)
+        .padding(.horizontal, 30)
+        .background(BlurView())
+        .cornerRadius(12)
     }
 }
 
@@ -478,6 +529,19 @@ struct MultiLineTF: UIViewRepresentable {
     
 }
 
+//BlurView
+struct BlurView: UIViewRepresentable {
+    
+    func makeUIView(context: Context) -> some UIView {
+        
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterial))
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+}
 
 //選択された画像用構造体
 struct favMusics: Identifiable {

@@ -6,8 +6,16 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+import Firebase
 
 struct MainView: View {
+    
+    @ObservedObject var getPostData = GetPostData()
+    
+    //RealtimeDatabaseリファレンス
+    @State var ref = Database.database().reference()
+    
     var body: some View {
         
         VStack() {
@@ -18,7 +26,20 @@ struct MainView: View {
                 .scaledToFit()
                 .padding(.top)
             
+            
+            ForEach(getPostData.postData){music in
+                
+                Text(music.artistName)
+            }
+            
             Spacer()
+            
+        }
+        //このビューが読み込まれたら投稿データを取得
+        .onAppear {
+            
+            
+            getPostData.fetchPostData(ref: ref)
         }
     }
 }

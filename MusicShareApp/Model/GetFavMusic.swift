@@ -8,7 +8,6 @@
 import Foundation
 import Firebase
 
-
 class GetFavMusic: ObservableObject {
     
     //お気に入り音楽情報保存用配列
