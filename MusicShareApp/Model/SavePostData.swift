@@ -21,6 +21,9 @@ class SavePostData: Identifiable {
     //投稿日時
     var date: String! = ""
     
+    //投稿内容を分けるautoID
+    var autoID: String! = ""
+    
     let ref:DatabaseReference!
     
     //イニシャライザ
@@ -34,8 +37,9 @@ class SavePostData: Identifiable {
         self.userName = userName
         self.post = post
         self.date = date
+        self.autoID = UUID().uuidString
         
-        ref = Database.database().reference().child("posts").childByAutoId()
+        ref = Database.database().reference().child("posts").child(autoID)
     }
     
     //投稿データ取得用イニシャライザー
@@ -53,6 +57,7 @@ class SavePostData: Identifiable {
             userName =  value["userName"] as? String
             post = value["post"] as? String
             date = value["date"] as? String
+            autoID = value["autoID"] as? String
         }
     }
     
@@ -61,6 +66,6 @@ class SavePostData: Identifiable {
         
         ref.setValue(["trackID":trackID!,"artistName":artistName!,"musicName":musicName!,
                       "imageUrl":imageUrl!,
-                      "userID": userID!,"userName":userName!,"date":date!,"post":post!])
+                      "userID": userID!,"userName":userName!,"date":date!,"post":post!,"autoID":autoID!])
     }
 }

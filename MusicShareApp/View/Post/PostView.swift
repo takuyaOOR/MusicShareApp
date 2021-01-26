@@ -341,6 +341,9 @@ struct CommentView: View {
     var userID = UserDefaults.standard.object(forKey: "userID")
     var userName = UserDefaults.standard.object(forKey: "userName")
     
+    //投稿完了ボタン押下で選択画面に戻す用の環境変数
+    @Environment(\.presentationMode) var presentation
+    
     var body: some View {
         
         ZStack {
@@ -413,68 +416,70 @@ struct CommentView: View {
                     .opacity(self.text.trimmingCharacters(in: .whitespaces).isEmpty == true ? 0.5 : 1)
                 }
                 //AlertView
-//                .alert(isPresented: self.$showAlert) {
-//                    Alert(title: Text("投稿が完了しました"), message: Text(""),
-//                          dismissButton: .default(Text("OK"), action: {
+                .alert(isPresented: self.$showAlert) {
+                    Alert(title: Text("投稿が完了しました"), message: Text(""),
+                          dismissButton: .default(Text("OK"), action: {
+                            
 //                            self.showHomeView.toggle()
-//                          }))
-//                }
-                //HOMW画面を表示
-                .fullScreenCover(isPresented: self.$showHomeView) {
-                    
-                    HomescreenView()
+                            self.presentation.wrappedValue.dismiss()
+                          }))
                 }
+                //HOME画面を表示
+//                .fullScreenCover(isPresented: self.$showHomeView) {
+//
+//                    HomescreenView()
+//                }
             }
             .padding()
             
-            if self.showAlert {
-                CustomAlertView(showAlert: $showAlert, showHomeView: $showHomeView)
-            }
+//            if self.showAlert {
+//                CustomAlertView(showAlert: $showAlert, showHomeView: $showHomeView)
+//            }
         }
     }
 }
 
 //CustomAlertView
-struct CustomAlertView: View {
-    
-    @Binding var showAlert: Bool
-    
-    @Binding var showHomeView: Bool
-    
-    var body: some View {
-            
-        VStack(spacing: 15) {
-            
-            Image(systemName: "checkmark.circle")
-                .resizable()
-                .frame(width: 150, height: 150)
-                .foregroundColor(Color("Color3"))
-            
-            Text("投稿が完了しました")
-                .font(.title)
-                .foregroundColor(Color("Color1"))
-            
-            Button(action: {
-                
-                self.showHomeView.toggle()
-            }) {
-                
-                Text("OK")
-                    .foregroundColor(Color("Color1"))
-                    .padding()
-                    .padding(.horizontal)
-                    .background(Color("Color3"))
-                    .clipShape(Capsule())
-            }
-        }
-        .frame(width: UIScreen.main.bounds.width,
-               height: UIScreen.main.bounds.height)
-        .padding(.vertical, 50)
-        .padding(.horizontal, 30)
-        .background(BlurView())
-        .cornerRadius(12)
-    }
-}
+//struct CustomAlertView: View {
+//
+//    @Binding var showAlert: Bool
+//
+//    @Binding var showHomeView: Bool
+//
+//    var body: some View {
+//
+//        VStack(spacing: 15) {
+//
+//            Image(systemName: "checkmark.circle")
+//                .resizable()
+//                .frame(width: 150, height: 150)
+//                .foregroundColor(Color("Color3"))
+//
+//            Text("投稿が完了しました")
+//                .font(.title)
+//                .foregroundColor(Color("Color1"))
+//
+//            Button(action: {
+//
+//                self.showHomeView.toggle()
+//            }) {
+//
+//                Text("OK")
+//                    .foregroundColor(Color("Color1"))
+//                    .padding()
+//                    .padding(.horizontal)
+//                    .background(Color("Color3"))
+//                    .clipShape(Capsule())
+//            }
+//        }
+//        .frame(width: UIScreen.main.bounds.width,
+//               height: UIScreen.main.bounds.height)
+//        .padding(.vertical, 50)
+//        .padding(.horizontal, 30)
+//        .background(BlurView())
+//        .cornerRadius(12)
+//    }
+//}
 
 //投稿画面のMultiLineTextField用
 struct MultiLineTF: UIViewRepresentable {

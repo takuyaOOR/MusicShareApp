@@ -27,6 +27,7 @@ struct AccountView: View {
                 try! Auth.auth().signOut()
                 UserDefaults.standard.set(false, forKey: "status")
                 NotificationCenter.default.post(name: NSNotification.Name("status"), object: nil)
+                
             }) {
                 Text("ログアウト")
                     .foregroundColor(.white)

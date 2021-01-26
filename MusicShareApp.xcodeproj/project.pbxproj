@@ -13,6 +13,7 @@
 		2922928D2562E37F00746C91 /* CustomTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922928C2562E37F00746C91 /* CustomTabsView.swift */; };
 		2926F6DE2599CE24002CCE99 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926F6DD2599CE24002CCE99 /* MainView.swift */; };
 		293159A625A7292F00A5A5AA /* GetPostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293159A525A7292F00A5A5AA /* GetPostData.swift */; };
+		293C71CC25B458CA001D3715 /* SaveFavPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293C71CB25B458CA001D3715 /* SaveFavPost.swift */; };
 		2956C37D257CF5B00030A8E6 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2956C37C257CF5B00030A8E6 /* PostView.swift */; };
 		295AA9592565705F0024C34F /* SaveProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295AA9582565705F0024C34F /* SaveProfile.swift */; };
 		29639481256BE14F0025858D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639480256BE14F0025858D /* CardView.swift */; };
@@ -46,6 +47,7 @@
 		2922928C2562E37F00746C91 /* CustomTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabsView.swift; sourceTree = "<group>"; };
 		2926F6DD2599CE24002CCE99 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		293159A525A7292F00A5A5AA /* GetPostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostData.swift; sourceTree = "<group>"; };
+		293C71CB25B458CA001D3715 /* SaveFavPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFavPost.swift; sourceTree = "<group>"; };
 		2956C37C257CF5B00030A8E6 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		295AA9582565705F0024C34F /* SaveProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfile.swift; sourceTree = "<group>"; };
 		29639480256BE14F0025858D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				29076BA5256933CC001A202E /* ItunesSearchAPI.swift */,
 				29F2E2D125708F7D0071CFA9 /* GetFavMusic.swift */,
 				293159A525A7292F00A5A5AA /* GetPostData.swift */,
+				293C71CB25B458CA001D3715 /* SaveFavPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				29F2E2D225708F7D0071CFA9 /* GetFavMusic.swift in Sources */,
 				29639481256BE14F0025858D /* CardView.swift in Sources */,
 				29076BA025692A8E001A202E /* MusicItem.swift in Sources */,
+				293C71CC25B458CA001D3715 /* SaveFavPost.swift in Sources */,
 				29BFE9D52560FFFF008FD849 /* LoginView.swift in Sources */,
 				29BEB3C5256124D2006CE43D /* ErrorView.swift in Sources */,
 				29BFE9DD25610026008FD849 /* HomeView.swift in Sources */,
